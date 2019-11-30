@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>2019 on Cognition Limits Imagination</title>
-    <link>/categories/2019/</link>
-    <description>Recent content in 2019 on Cognition Limits Imagination</description>
+    <title>Life on Cognition Limits Imagination</title>
+    <link>/tags/life/</link>
+    <description>Recent content in Life on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 30 Nov 2019 11:06:30 +0800</lastBuildDate>
     
-	<atom:link href="/categories/2019/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/life/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -32,15 +32,6 @@
  如果極限已經明擺著在那邊，那麼要調整的是目標、心態、還是其它？
  我該更專注在找尋自己錯誤，也許每日習慣要再加一個：每天找一個自己的錯誤
   </description>
-    </item>
-    
-    <item>
-      <title>First post</title>
-      <link>/posts/first-post/</link>
-      <pubDate>Fri, 01 Nov 2019 14:53:10 +0800</pubDate>
-      
-      <guid>/posts/first-post/</guid>
-      <description>This is the first post, nothing particular to say, just the announcement.</description>
     </item>
     
   </channel>
