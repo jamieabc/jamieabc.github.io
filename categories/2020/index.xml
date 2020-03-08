@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2020 on Cognition Limits Imagination</title>
+    <link>/categories/2020/</link>
+    <description>Recent content in 2020 on Cognition Limits Imagination</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 08 Mar 2020 17:25:34 +0800</lastBuildDate>
+    
+	<atom:link href="/categories/2020/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Raise Coverate Rate to 80</title>
+      <link>/posts/raise-coverate-rate-to-80/</link>
+      <pubDate>Sun, 08 Mar 2020 17:25:34 +0800</pubDate>
+      
+      <guid>/posts/raise-coverate-rate-to-80/</guid>
+      <description>Recently I am trying to increase 2 packges unit test coverage rate to at least 70%. Of course, high coverage rate isn&amp;rsquo;t always correct, some corner conditions are not necessray to test, so 70 is just a number that tries to say most critical statement are well-tested.
+These 2 packges with 0% and 20% unit test coverate rate at the time I am trying to modify. After some refactoring, coverage rate reaches 80% and 78% respectively.</description>
+    </item>
+    
+  </channel>
+</rss>

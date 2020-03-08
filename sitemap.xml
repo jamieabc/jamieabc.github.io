@@ -3,17 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/categories/2019/</loc>
-    <lastmod>2019-12-13T20:20:35+08:00</lastmod>
+    <loc>/categories/2020/</loc>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-12-13T20:20:35+08:00</lastmod>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/life/</loc>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/programming/</loc>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/raise-coverate-rate-to-80/</loc>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-08T17:25:34+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/2019/</loc>
     <lastmod>2019-12-13T20:20:35+08:00</lastmod>
   </url>
   
@@ -23,27 +53,7 @@
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2019-12-13T20:20:35+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/programming/</loc>
-    <lastmod>2019-12-13T20:20:35+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-12-13T20:20:35+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/posts/correct-my-errors/</loc>
-    <lastmod>2019-11-30T11:06:30+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/life/</loc>
     <lastmod>2019-11-30T11:06:30+08:00</lastmod>
   </url>
   

@@ -6,10 +6,20 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Dec 2019 20:20:35 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 17:25:34 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Raise Coverate Rate to 80</title>
+      <link>/posts/raise-coverate-rate-to-80/</link>
+      <pubDate>Sun, 08 Mar 2020 17:25:34 +0800</pubDate>
+      
+      <guid>/posts/raise-coverate-rate-to-80/</guid>
+      <description>Recently I am trying to increase 2 packges unit test coverage rate to at least 70%. Of course, high coverage rate isn&amp;rsquo;t always correct, some corner conditions are not necessray to test, so 70 is just a number that tries to say most critical statement are well-tested.
+These 2 packges with 0% and 20% unit test coverate rate at the time I am trying to modify. After some refactoring, coverage rate reaches 80% and 78% respectively.</description>
+    </item>
     
     <item>
       <title>Leetcode</title>
