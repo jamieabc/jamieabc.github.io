@@ -17,8 +17,8 @@
       <pubDate>Sun, 08 Mar 2020 17:25:34 +0800</pubDate>
       
       <guid>/posts/raise-coverate-rate-to-80/</guid>
-      <description>Recently I am trying to increase 2 packges unit test coverage rate to at least 70%. Of course, high coverage rate isn&amp;rsquo;t always correct, some corner conditions are not necessray to test, so 70 is just a number that tries to say most critical statement are well-tested.
-These 2 packges with 0% and 20% unit test coverate rate at the time I am trying to modify. After some refactoring, coverage rate reaches 80% and 78% respectively.</description>
+      <description>Recently I have done raising unit tests coverage rate of 2 packages to at least 80%. Of course, high coverage rate isn&amp;rsquo;t always a gold standard to achieve, and some corner conditions are not necessray to test, so 80% seems a number that tries to demonstrate most code paths are testable.
+These 2 packges with 0% and 20% unit test coverate rate at the time I started to modify. After some refactoring, both packages&amp;rsquo; coverage rate reaches 80%.</description>
     </item>
     
   </channel>

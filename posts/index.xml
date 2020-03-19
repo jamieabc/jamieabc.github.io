@@ -14,25 +14,20 @@
 			<pubDate>Sun, 08 Mar 2020 17:25:34 +0800</pubDate>
 			
 			<guid>/posts/raise-coverate-rate-to-80/</guid>
-			<description>Recently I am trying to increase 2 packges unit test coverage rate to at least 70%. Of course, high coverage rate isn&amp;rsquo;t always correct, some corner conditions are not necessray to test, so 70 is just a number that tries to say most critical statement are well-tested.
-These 2 packges with 0% and 20% unit test coverate rate at the time I am trying to modify. After some refactoring, coverage rate reaches 80% and 78% respectively.</description>
-			<content type="html"><![CDATA[<p>Recently I am trying to increase 2 packges unit test coverage rate to at least 70%. Of course, high coverage rate isn&rsquo;t always correct, some corner conditions are not necessray to test, so 70 is just a number that tries to say most critical statement are well-tested.</p>
-
-<p>These 2 packges with 0% and 20% unit test coverate rate at the time I am trying to modify. After some refactoring, coverage rate reaches 80% and 78% respectively. I believe most part the code is tested, and I want to summarize the experience in these 3 weeks.</p>
-
+			<description>Recently I have done raising unit tests coverage rate of 2 packages to at least 80%. Of course, high coverage rate isn&amp;rsquo;t always a gold standard to achieve, and some corner conditions are not necessray to test, so 80% seems a number that tries to demonstrate most code paths are testable.
+These 2 packges with 0% and 20% unit test coverate rate at the time I started to modify. After some refactoring, both packages&amp;rsquo; coverage rate reaches 80%.</description>
+			<content type="html"><![CDATA[<p>Recently I have done raising unit tests coverage rate of 2 packages to at least 80%. Of course, high coverage rate isn&rsquo;t always a gold standard to achieve, and some corner conditions are not necessray to test, so 80% seems a number that tries to demonstrate most code paths are testable.</p>
+<p>These 2 packges with 0% and 20% unit test coverate rate at the time I started to modify. After some refactoring, both packages&rsquo; coverage rate reaches 80%. I believe most part of code is testable, and I want to summarize experience of 3 weeks working.</p>
 <ul>
 <li>Dependency Inversion Principle</li>
 </ul>
-
 <p>Dependencies of a package sometimes is unavoidable, so now when I try to refactor, the first thing I will list is it&rsquo;s depdendencies, because those things are usualy necessary to control. Second thing is to check those dependencies is in the form of <code>interface</code>, <code>functions/methods</code>, <code>data structures</code>.</p>
-
 <p>All of dependency can be managed by input parameter, so that those dependencies are controllable.</p>
-
 <p>Take following code as an example:</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">one</span>
 
 <span class="kd">func</span> <span class="nf">test</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
-  <span class="nx">obj</span> <span class="o">:=</span> <span class="nx">otherPackage</span><span class="p">.</span><span class="nf">Get</span><span class="p">()</span>
+  <span class="nx">obj</span> <span class="o">:=</span> <span class="nx">two</span><span class="p">.</span><span class="nf">Get</span><span class="p">()</span>
   <span class="k">return</span> <span class="nx">v</span><span class="p">.</span><span class="nf">Closed</span><span class="p">()</span>
 <span class="p">}</span>
 
@@ -54,25 +49,19 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
   <span class="k">return</span> <span class="o">&amp;</span><span class="nx">data</span><span class="p">{</span>
     <span class="nx">Closed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<p>Since <code>Two</code> is already an <code>interface</code>, everything I need to do is raising <code>otherPackage.Get()</code> into arguments so that it&rsquo;s testable and controllable.</p>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">test</span><span class="p">(</span><span class="nx">t</span> <span class="nx">Two</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Closed</span><span class="p">()</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</code></pre></div><p>Since <code>Two</code> is already an <code>interface</code>, everything I need to do is create a new variable of <code>two.Get()</code> and given by function arguments so that it&rsquo;s testable and controllable.</p>
 <ul>
 <li>Single Responsibility Principle</li>
 </ul>
-
-<p>This one is about piece of code should only responsible for a small part of thing, or one piece of code can only be modified by one reason.</p>
-
+<p>This one is about piece of code should only be responsible for a small part of task, or in other words, one piece of code should be modified by one reason.</p>
 <p>If a pacakge does too many things, then it&rsquo;s really hard to test. Taking network IO for example, if a pacakge creates http server, settings up routing paths, deciding which function responds to specific routes, then when it comes to testing, I have to start whole server and check for route&rsquo;s response. But, what if those handling function has dependencies such as DB, then it&rsquo;s really really hard to test.</p>
-
-<p>When I try to solve this problem, I separate specific package into 2 smaller packages:
-1. create http server which predefined handler
-1. handler that setups routes/function relationships</p>
-
+<p>When I try to solve this problem, I separate specific package into 2 smaller packages:</p>
+<ol>
+<li>create http server which predefined handler</li>
+<li>handler that setups routes/function relationships</li>
+</ol>
 <p>In this way, server can be tested by fake handler, no need to setup dependency such as DB. On the other hand, handler to be fed to fake server, so that no actual connection is needed.o</p>
-
 <p>Before refactoring, code has only one function: <code>CreateServer(...)</code>, after refactoring, additional packages are generated:</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">handler</span>
 
@@ -91,15 +80,12 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
   <span class="nx">mux</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/b&#34;</span><span class="p">,</span> <span class="nx">hdlr</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span>
   <span class="nx">mux</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/c&#34;</span><span class="p">,</span> <span class="nx">hdlr</span><span class="p">.</span><span class="nx">C</span><span class="p">)</span>
   <span class="nx">mux</span><span class="p">.</span><span class="nf">HandleFunc</span><span class="p">(</span><span class="s">&#34;/d&#34;</span><span class="p">,</span> <span class="nx">hdlr</span><span class="p">.</span><span class="nx">D</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>In this way, dependency of handler and server are separeted and thus easy to test. For example, when testing <code>server.New</code>, I can feed a fake handler and check if when <code>/a</code> is visited, specific interface is invoked.</p>
-
+<span class="p">}</span>
+</code></pre></div><p>In this way, dependency of handler and server are separeted and thus easy to test. For example, when testing <code>server.New</code>, I can feed a fake handler and check if when <code>/a</code> is visited, specific interface is invoked.</p>
 <ul>
 <li>Open-Closed Principle</li>
 </ul>
-
 <p>This one is easy, use <code>interface</code> is mostly the cure. When I tries to refactor from function/method into interface, the way I use is first move all dependency into argument, create an interface, use it.</p>
-
 <p>Take following code as an example:</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">one</span>
 
@@ -111,8 +97,8 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
 
 <span class="kd">func</span> <span class="nf">Set</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">db</span><span class="p">.</span><span class="nf">Set</span><span class="p">()</span><span class="o">...</span>
-<span class="p">}</span></code></pre></div>
-<p>Because <code>Set</code> is a function that has dependency to DB, and <code>test</code> directly calles package function which is hard to control, I have refactor it into this:</p>
+<span class="p">}</span>
+</code></pre></div><p>Because <code>Set</code> is a function that has dependency to DB, and <code>test</code> directly calles package function which is hard to control, I may refactor it:</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">one</span>
 
 <span class="kd">func</span> <span class="nf">test</span><span class="p">(</span><span class="nx">t</span> <span class="nx">two</span><span class="p">.</span><span class="nx">Two</span><span class="p">)</span> <span class="p">{</span>
@@ -133,15 +119,12 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
 
 <span class="kd">func</span> <span class="nf">Get</span><span class="p">()</span> <span class="nx">Two</span> <span class="p">{</span>
   <span class="k">return</span> <span class="o">&amp;</span><span class="nx">data</span><span class="p">{}</span>
-<span class="p">}</span></code></pre></div>
-<p>I will have a exporeted function <code>Get</code> for acquire <code>interface</code>, then everything can be tested by specific argument.</p>
-
+<span class="p">}</span>
+</code></pre></div><p>I will have a exporeted function <code>Get</code> to acquire <code>interface</code>, then everything can be tested by specific argument.</p>
 <ul>
 <li>Interface Segratation Principle</li>
 </ul>
-
 <p>This one is more like how small a <code>interface</code> can be, what I try to think is the minimal requirement of data strucuture, if some data strucutre is only used by some API, then it&rsquo;s likely that API can be separated into smaller ones.</p>
-
 <p>As an example of this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">t</span> <span class="kd">interface</span> <span class="p">{</span>
   <span class="nf">Get</span><span class="p">()</span>
@@ -164,8 +147,8 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
 
 <span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">data</span><span class="p">)</span> <span class="nf">OK</span><span class="p">()</span> <span class="kt">bool</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">initialised</span>
-<span class="p">}</span></code></pre></div>
-<p>From example, only variable <code>Get</code> &amp; <code>Set</code> relates is <code>value</code>, and <code>OK</code> relates to <code>initialised</code>, so I would separete this <code>interface</code> into two:</p>
+<span class="p">}</span>
+</code></pre></div><p>From example, only variable <code>Get</code> &amp; <code>Set</code> relates is <code>value</code>, and <code>OK</code> relates to <code>initialised</code>, so I would separete this <code>interface</code> into two:</p>
 <div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">t</span> <span class="kd">interface</span> <span class="p">{</span>
   <span class="nx">t1</span>
   <span class="nx">t2</span>
@@ -178,9 +161,8 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
 
 <span class="kd">type</span> <span class="nx">t2</span> <span class="kd">interface</span> <span class="p">{</span>
   <span class="nf">OK</span><span class="p">()</span> <span class="kt">bool</span>
-<span class="p">}</span></code></pre></div>
-<p>Of course this is a simple example, real world is much more complex, it has lock, communication, efficiency to consider, but how many variables related is how I consider when to separete <code>interface</code>.</p>
-
+<span class="p">}</span>
+</code></pre></div><p>Of course this is a simple example, real world is much more complex, it has lock, communication, efficiency to consider, but how many variables related is how I consider when to separete <code>interface</code>.</p>
 <p>To summarzie, programming is a technique to make code clena, simple, flexible, and testable. I am still trying to learn how to code in a better way, this is just what I learned from 3 weeks of refactoring. At last, <a href="https://github.com/bitmark-inc/bitmarkd/pull/135">this</a> and <a href="https://github.com/bitmark-inc/bitmarkd/pull/144">this</a> is my modification for code, hope I can have better skills through career.</p>
 ]]></content>
 		</item>
@@ -201,21 +183,13 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
 這一兩個月寫的結果，是更深一層的體會到寫這些題目對於訓練自己思考很有幫助，而且也讓自己無懼於寫程式。雖然聽起來有點好笑，一個以寫程式為生的人怎麼會懼於寫程式？但事實上，透過這些訓練，讓我對寫出來的程式更有信心。
 要寫多久呢？不曉得，至少最近幾個月會是我的主要目標，希望能有更多的收穫。</description>
 			<content type="html"><![CDATA[<p>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了四五年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。</p>
-
 <p>這故事聽起來很狗血，好像傳統教條「努力一定會成功」，但我得到啟發並不是這個。</p>
-
 <p>如果一件事做起來很無聊又好像沒什麼成效，做失敗還會有心理上挫敗，那麼一般情況下人會想做嗎？很大概率是不會吧，就像讀書這種事，出了學校之後很少有人會願意再這麼做了，很大一部份原因在於很難看到成效，世界上還沒有一種評量方式能知道一個人在知識、認知領域到底有多少進步。</p>
-
 <p>那回過頭來，如果有人能做這件事，而且還持續不懈的做，那麼原因是什麼呢？自虐？無聊？我想，要不代表這個人有辦法在這件事裡面找到成就，或是因為這個人能用長遠眼光自律努力。</p>
-
 <p>不論那個原因，背後代表的都是與眾不同，這也是我覺得這件事難的地方。</p>
-
 <p>辜且不論 Leetcode 對於寫程式有多少幫助，或是在這個時代進入大公司到底是不是一個好選擇，如果一個人能持續努力提升，那麼在任何領域應該都能有不錯表現。</p>
-
 <p>所以我最近也開始刷題，主要目的並不是為了進公司（如果能進也很好），主要還是為了養成自己持續精進習慣，在實際生活中實踐我所知道的道理。</p>
-
 <p>這一兩個月寫的結果，是更深一層的體會到寫這些題目對於訓練自己思考很有幫助，而且也讓自己無懼於寫程式。雖然聽起來有點好笑，一個以寫程式為生的人怎麼會懼於寫程式？但事實上，透過這些訓練，讓我對寫出來的程式更有信心。</p>
-
 <p>要寫多久呢？不曉得，至少最近幾個月會是我的主要目標，希望能有更多的收穫。</p>
 ]]></content>
 		</item>
@@ -230,52 +204,48 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I am trying 
 基於好奇心的原故，想了解那局棋賽到底是怎麼贏的（以下說明文字來自wiki)：
  李世乭（白方）勝出第四局；古力將李世乭78手稱為「神之一手」，AlphaGo大約在87手才發現它79手算錯了，其後AlphaGo在97手時更出現入門級別的錯誤；李世乭在這次比賽發現AlphaGo用黑子對抗白子時，若遇上不在預期內的棋步就可能出錯；其次，只要AlphaGo用黑子下棋，猶疑的時間更久[27]。而這些錯誤的原因，DeepMind團隊還沒有找出來[28]。
  簡單概括第四局過程：AlphaGo 在 79 手犯錯，在 87 手發現先前錯誤，在 97 手犯另一個錯，做個簡單假設棋局 100 手大置決定結果，那麼 79 手的錯誤經過 8 手後被發現，後續補救經過 10 手依舊無太大效果。
-上面這段文字說明看起來稀鬆平常，但別忘了 AlphaGo 每秒超過上萬個運算, 即便是數分鐘運算人類終其一生大概也做不到麼多考慮；在這樣高強度、窮其算力找尋當下勝率最高的決定，也需要接近 100 手的 1&amp;frasl;10 時間來發覺與修正錯誤， 如果拿人來比喻，某年植入一個錯誤思維，經過 8 年後終於發覺，再 10 年內補救。
+上面這段文字說明看起來稀鬆平常，但別忘了 AlphaGo 每秒超過上萬個運算, 即便是數分鐘運算人類終其一生大概也做不到麼多考慮；在這樣高強度、窮其算力找尋當下勝率最高的決定，也需要接近 100 手的 1/10 時間來發覺與修正錯誤， 如果拿人來比喻，某年植入一個錯誤思維，經過 8 年後終於發覺，再 10 年內補救。
 上面的例子真實嗎？我也不確定，但如果是我有個致命思維植入，有辦法在多快時間內自我修正？我有多久沒有更正自己錯誤？
 更有趣的是，李世㐔在賽後認為能贏得棋賽是 AI 的「缺陷」
  李世乭向《韓聯社》解釋，「我的白78手不是一個該直接對付的棋路。在絕藝（中國圍棋AI）中也有一樣的錯誤。即使讓人類兩子，絕藝也是位非常難以拿下的對手。但因為錯誤的原因，當它輸時會以非常奇怪的形式落敗。」
  事情經過兩年再重新讀相關新聞，突然覺得在這件裡判斷輸贏是簡單的，而難的是從什麼樣的角度解讀；時至今日，AI 已經能在許多人類曾經擅長領域用更快、更簡單方式執行。
 我自己現在的感想：
- 在單一目標領域，電腦比人類更擅長
- 目標不再是想贏過電腦，而是如何擅用電腦長處
- 當下犯什麼錯誤不重要，更正錯誤速度才重要
- 如果極限已經明擺著在那邊，那麼要調整的是目標、心態、還是其它？
- 我該更專注在找尋自己錯誤，也許習慣清單上要再加一個：每週至少找到一個自己的錯誤
+  在單一目標領域，電腦比人類更擅長
+  目標不再是想贏過電腦，而是如何擅用電腦長處
+  當下犯什麼錯誤不重要，更正錯誤速度才重要
+  如果極限已經明擺著在那邊，那麼要調整的是目標、心態、還是其它？
+  我該更專注在找尋自己錯誤，也許習慣清單上要再加一個：每週至少找到一個自己的錯誤
   </description>
 			<content type="html"><![CDATA[<p>最近看到新聞，人類到目前為止唯一在公開賽中贏過 AlphaGo 的韓國棋手李世㐔宣部退休，結束其24年圍棋生涯。</p>
-
 <p>基於好奇心的原故，想了解那局棋賽到底是怎麼贏的（以下說明文字來自<a href="https://zh.wikipedia.org/wiki/AlphaGo%E6%9D%8E%E4%B8%96%E4%B9%AD%E4%BA%94%E7%95%AA%E6%A3%8B">wiki</a>)：</p>
-
 <blockquote>
 <p>李世乭（白方）勝出第四局；古力將李世乭78手稱為「神之一手」，AlphaGo大約在87手才發現它79手算錯了，其後AlphaGo在97手時更出現入門級別的錯誤；李世乭在這次比賽發現AlphaGo用黑子對抗白子時，若遇上不在預期內的棋步就可能出錯；其次，只要AlphaGo用黑子下棋，猶疑的時間更久[27]。而這些錯誤的原因，DeepMind團隊還沒有找出來[28]。</p>
 </blockquote>
-
 <p>簡單概括第四局過程：AlphaGo 在 79 手犯錯，在 87 手發現先前錯誤，在 97 手犯另一個錯，做個簡單假設棋局 100 手大置決定結果，那麼 79 手的錯誤經過 8 手後被發現，後續補救經過 10 手依舊無太大效果。</p>
-
-<p>上面這段文字說明看起來稀鬆平常，但別忘了 AlphaGo 每秒超過上萬個運算, 即便是數分鐘運算人類終其一生大概也做不到麼多考慮；在這樣高強度、窮其算力找尋當下勝率最高的決定，也需要接近 100 手的 <sup>1</sup>&frasl;<sub>10</sub> 時間來發覺與修正錯誤， 如果拿人來比喻，某年植入一個錯誤思維，經過 8 年後終於發覺，再 10 年內補救。</p>
-
+<p>上面這段文字說明看起來稀鬆平常，但別忘了 AlphaGo 每秒超過上萬個運算, 即便是數分鐘運算人類終其一生大概也做不到麼多考慮；在這樣高強度、窮其算力找尋當下勝率最高的決定，也需要接近 100 手的 1/10 時間來發覺與修正錯誤， 如果拿人來比喻，某年植入一個錯誤思維，經過 8 年後終於發覺，再 10 年內補救。</p>
 <p>上面的例子真實嗎？我也不確定，但如果是我有個致命思維植入，有辦法在多快時間內自我修正？我有多久沒有更正自己錯誤？</p>
-
 <p>更有趣的是，李世㐔在賽後認為能贏得棋賽是 AI 的<a href="https://www.bnext.com.tw/article/55680/alphago-lee-se-dol-retire">「缺陷」</a></p>
-
 <blockquote>
 <p>李世乭向《韓聯社》解釋，「我的白78手不是一個該直接對付的棋路。在絕藝（中國圍棋AI）中也有一樣的錯誤。即使讓人類兩子，絕藝也是位非常難以拿下的對手。但因為錯誤的原因，當它輸時會以非常奇怪的形式落敗。」</p>
 </blockquote>
-
 <p>事情經過兩年再重新讀相關新聞，突然覺得在這件裡判斷輸贏是簡單的，而難的是從什麼樣的角度解讀；時至今日，AI 已經能在許多人類曾經擅長領域用更快、更簡單方式執行。</p>
-
 <p>我自己現在的感想：</p>
-
 <ol>
-<li><p>在單一目標領域，電腦比人類更擅長</p></li>
-
-<li><p>目標不再是想贏過電腦，而是如何擅用電腦長處</p></li>
-
-<li><p>當下犯什麼錯誤不重要，更正錯誤速度才重要</p></li>
-
-<li><p>如果極限已經明擺著在那邊，那麼要調整的是目標、心態、還是其它？</p></li>
-
-<li><p>我該更專注在找尋自己錯誤，也許習慣清單上要再加一個：每週至少找到一個自己的錯誤</p></li>
+<li>
+<p>在單一目標領域，電腦比人類更擅長</p>
+</li>
+<li>
+<p>目標不再是想贏過電腦，而是如何擅用電腦長處</p>
+</li>
+<li>
+<p>當下犯什麼錯誤不重要，更正錯誤速度才重要</p>
+</li>
+<li>
+<p>如果極限已經明擺著在那邊，那麼要調整的是目標、心態、還是其它？</p>
+</li>
+<li>
+<p>我該更專注在找尋自己錯誤，也許習慣清單上要再加一個：每週至少找到一個自己的錯誤</p>
+</li>
 </ol>
 ]]></content>
 		</item>
