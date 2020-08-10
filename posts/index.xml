@@ -5,8 +5,256 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Sun, 08 Mar 2020 17:25:34 +0800</lastBuildDate>
+		<lastBuildDate>Mon, 10 Aug 2020 15:48:42 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Leetcode 1547 (1)</title>
+			<link>/posts/leetcode-1547-1/</link>
+			<pubDate>Mon, 10 Aug 2020 15:48:42 +0800</pubDate>
+			
+			<guid>/posts/leetcode-1547-1/</guid>
+			<description>This article is to write down some notes while solving thie problem.
+Greedy I started with this example:
+ n = 7, cuts = [1,3,4,5]
+   initial status:
+ _ _ _ _ _ _ _ 0 7    first cut at 3:
+ _ _ _ _ | _ _ _ _ _ 0 3 3 7  cost: 7 (because total length before cut is 7)</description>
+			<content type="html"><![CDATA[<p>This article is to write down some notes while solving thie <a href="https://leetcode.com/problems/minimum-cost-to-cut-a-stick/">problem</a>.</p>
+<h1 id="greedy">Greedy</h1>
+<p>I started with this example:</p>
+<blockquote>
+<p>n = 7, cuts = [1,3,4,5]</p>
+</blockquote>
+<ol>
+<li>
+<p>initial status:</p>
+<pre><code> _ _ _ _ _ _ _
+ 0           7
+</code></pre>
+</li>
+<li>
+<p>first cut at 3:</p>
+<pre><code> _ _ _ _ | _ _ _ _ _
+ 0     3   3       7
+</code></pre>
+<p>cost: 7 (because total length before cut is 7)</p>
+</li>
+<li>
+<p>second cut at 1:</p>
+<pre><code> _ _ | _ _ _ | _ _ _ _ _
+ 0 1   1   3   3       7
+</code></pre>
+<p>cost: 7 + 3 (because total length at 1 is 3)</p>
+</li>
+<li>
+<p>third cut at 5:</p>
+<pre><code> _ _ | _ _ _ | _ _ _ | _ _ _
+ 0 1   1   3   3   5   5   7
+</code></pre>
+<p>cost: 10 + 4 (because total length at 5 is 7-3)</p>
+</li>
+<li>
+<p>forth cut at 4:</p>
+<pre><code> _ _ | _ _ _ | _ _ | _ _ | _ _ _
+ 0 1   1   3   3 4   4 5   5   7
+</code></pre>
+<p>cost: 14 + 2 (because total length at 4 is 5-3)</p>
+</li>
+</ol>
+<p>After operation, total cost is 16 which is expected answer, so I came up
+with an heurestic: for every interval, choose cut as close to mid as possible.</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">minCost</span><span class="p">(</span><span class="nx">n</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">cuts</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="nx">sort</span><span class="p">.</span><span class="nf">Ints</span><span class="p">(</span><span class="nx">cuts</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nf">recursive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">cuts</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">recursive</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">end</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">cuts</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">start</span> <span class="o">==</span> <span class="nx">end</span> <span class="o">||</span> <span class="nb">len</span><span class="p">(</span><span class="nx">cuts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">0</span>
+	<span class="p">}</span>
+
+	<span class="nx">target</span> <span class="o">:=</span> <span class="nx">start</span> <span class="o">+</span> <span class="p">(</span><span class="nx">end</span><span class="o">-</span><span class="nx">start</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+	<span class="c1">// find closest index
+</span><span class="c1"></span>	<span class="nx">idx</span> <span class="o">:=</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="nx">cuts</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span>
+	<span class="nx">prevIdx</span> <span class="o">:=</span> <span class="nf">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">idx</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+	<span class="k">if</span> <span class="nx">cuts</span><span class="p">[</span><span class="nx">prevIdx</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nx">start</span> <span class="o">&amp;&amp;</span> <span class="nf">abs</span><span class="p">(</span><span class="nx">cuts</span><span class="p">[</span><span class="nx">prevIdx</span><span class="p">]</span><span class="o">-</span><span class="nx">target</span><span class="p">)</span> <span class="p">&lt;</span> <span class="nf">abs</span><span class="p">(</span><span class="nx">cuts</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span><span class="o">-</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">idx</span> <span class="p">=</span> <span class="nx">prevIdx</span>
+	<span class="p">}</span>
+
+	<span class="c1">// go divide &amp; conquer
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span> <span class="o">+</span> <span class="nf">recursive</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">cuts</span><span class="p">[</span><span class="nx">idx</span><span class="p">],</span> <span class="nx">cuts</span><span class="p">[:</span><span class="nx">idx</span><span class="p">])</span> <span class="o">+</span> <span class="nf">recursive</span><span class="p">(</span><span class="nx">cuts</span><span class="p">[</span><span class="nx">idx</span><span class="p">],</span> <span class="nx">end</span><span class="p">,</span> <span class="nx">cuts</span><span class="p">[</span><span class="nx">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">max</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="nx">j</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">i</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">j</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">abs</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">i</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="o">-</span><span class="nx">i</span>
+<span class="p">}</span>
+
+<span class="c1">// return index
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">binarySearch</span><span class="p">(</span><span class="nx">cuts</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">target</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="nx">low</span><span class="p">,</span> <span class="nx">high</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">cuts</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+
+	<span class="k">for</span> <span class="nx">low</span> <span class="p">&lt;</span> <span class="nx">high</span> <span class="p">{</span>
+		<span class="nx">mid</span> <span class="o">:=</span> <span class="nx">low</span> <span class="o">+</span> <span class="p">(</span><span class="nx">high</span><span class="o">-</span><span class="nx">low</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+		<span class="k">if</span> <span class="nx">cuts</span><span class="p">[</span><span class="nx">mid</span><span class="p">]</span> <span class="o">==</span> <span class="nx">target</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nx">mid</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">cuts</span><span class="p">[</span><span class="nx">mid</span><span class="p">]</span> <span class="p">&gt;</span> <span class="nx">target</span> <span class="p">{</span>
+			<span class="nx">high</span> <span class="p">=</span> <span class="nx">mid</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">low</span> <span class="p">=</span> <span class="nx">mid</span> <span class="o">+</span> <span class="mi">1</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">low</span>
+<span class="p">}</span>
+</code></pre></div><p>Unfortunately, this fails at test case: <code>30 [18,15,13,7,5,26,25,29]</code>.</p>
+<p>By above algorithm, cut procedure:</p>
+<ol>
+<li>
+<p>cut at 15:</p>
+<pre><code> _ _ _ _ ... _ _ _ | _ _ _ _ ... _ _ _
+ 0              15  15              30
+</code></pre>
+<p>cost: 30</p>
+</li>
+<li>
+<p>cut at 7:</p>
+<pre><code> _ _ _ ... _ _ | _ _ _ ... _ _ | _ _ _ ... _ _
+ 0           7   7          15  15          30
+</code></pre>
+<p>cost: 30 + 15</p>
+</li>
+<li>
+<p>cut at 5:</p>
+<pre><code> _ _ ... _ _ | _ _ _ | _ _ ... _ _ | _ _ _ ... _ _ _
+ 0         5   5   7   7        15  15            30
+</code></pre>
+<p>cost: 45 + 7</p>
+</li>
+<li>
+<p>cut at 13:</p>
+<pre><code> _ _ ... _ _ | _ _ _ | _ ... _ | _ _ _ | _ _ _ ... _ _ _
+ 0         5   5   7   7    13  13  15  15            30
+</code></pre>
+<p>cost: 52 + 8</p>
+</li>
+<li>
+<p>cut at 25:</p>
+<pre><code> _ ... _ | _ _ _ | _ ... _ | _ _ _ | _ ... _ | _ ... _
+ 0     5   5   7   7    13  13  15  15    25  25    30
+</code></pre>
+<p>cost: 60 + 15</p>
+</li>
+<li>
+<p>cut at 18:</p>
+<pre><code> _ ... _ | _ _ _ | _ ... _ | _ _ _ | _ ... _ | _ ... _ | _ ... _
+ 0     5   5   7   7    13  13  15  15    18  18    25  25    30
+</code></pre>
+<p>cost: 75 + 10</p>
+</li>
+<li>
+<p>cut at 26:</p>
+<pre><code> _ ... _ | _ _ _ | _ ... _ | _ _ _ | _ ... _ | _ ... _ | _  _ | _ ... _
+ 0     5   5   7   7    13  13  15  15    18  18    25  25 26  26    30
+</code></pre>
+<p>cost: 85 + 5</p>
+</li>
+<li>
+<p>cut at 29:</p>
+<pre><code> _ ... _ | _ _ _ | _ ... _ | _ _ _ | _ ... _ | _ ... _ | _  _ | _ ... _ | _  _
+ 0     5   5   7   7    13  13  15  15    18  18    25  25 26  26    29  29 30
+</code></pre>
+<p>cost: 90 + 4</p>
+</li>
+</ol>
+<p>By choosing closest cut, total cost is 94, but answer is 92. I haven&rsquo;t figure out how to get this optimal solution yet&hellip;</p>
+<h1 id="examplify">Examplify</h1>
+<p>Then I try to think from another way, try out with some base cases:</p>
+<ul>
+<li>
+<p>1 cut</p>
+<p>No matter where I put cost will be total size</p>
+</li>
+<li>
+<p>2 cuts</p>
+<p>Where to choose doesn&rsquo;t matter, since order is interchangeable in 2 cuts conditon, take 30 as example, cuts: [10, 20]</p>
+<ul>
+<li>
+<p>cuts [10, 20]</p>
+<p>first cost 30, second cost 10, total 40</p>
+</li>
+<li>
+<p>cuts [20, 10]</p>
+<p>first cost 30, second cost 10, total 40</p>
+</li>
+</ul>
+</li>
+<li>
+<p>3 cuts</p>
+<p>There are some choices to illustrate: take 30 as example, cuts: [1, 2, 3]</p>
+<ul>
+<li>
+<p>cuts [1, 2, 3]</p>
+<p>cost = 30 + 29 + 28 = 87</p>
+</li>
+<li>
+<p>cuts [2, 1, 3]</p>
+<p>cost = 30 + 2 + 28 = 60</p>
+</li>
+<li>
+<p>cuts [3, 1, 2]</p>
+<p>cost = 30 + 3 + 2 = 35</p>
+</li>
+</ul>
+<p>Take another example, cuts: [3, 20, 13]</p>
+<ul>
+<li>
+<p>cuts [3, 20, 13]</p>
+<p>cost = 30 + 27 + 17 = 74</p>
+</li>
+<li>
+<p>cuts [13, 3, 20]</p>
+<p>cost = 30 + 13 + 17 = 60</p>
+</li>
+<li>
+<p>cuts [20, 3, 13]</p>
+<p>cost = 30 + 20 + 17 = 67</p>
+</li>
+</ul>
+<p>The other example, cuts: [18, 24, 29]</p>
+<ul>
+<li>
+<p>cuts [18, 24, 29]</p>
+<p>cost = 30 + 12 + 6 = 48</p>
+</li>
+<li>
+<p>cuts [24, 18, 29]</p>
+<p>cost = 30 + 24 + 6 = 60</p>
+</li>
+<li>
+<p>cuts [29, 18, 24]</p>
+<p>cost = 30 + 29 + 11 = 70</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>It seems that 3 cuts example fits into previous greedy method: choose cut closes to middle size as possible.</p>
+<p>Haven&rsquo;t figure out the solution, just write down thinking process, and I will come back the other day to think again.</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Raise Coverate Rate to 80</title>
@@ -173,7 +421,7 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I started to
 			<pubDate>Fri, 13 Dec 2019 20:20:35 +0800</pubDate>
 			
 			<guid>/posts/leetcode/</guid>
-			<description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了四五年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。
+			<description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了三年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。
 這故事聽起來很狗血，好像傳統教條「努力一定會成功」，但我得到啟發並不是這個。
 如果一件事做起來很無聊又好像沒什麼成效，做失敗還會有心理上挫敗，那麼一般情況下人會想做嗎？很大概率是不會吧，就像讀書這種事，出了學校之後很少有人會願意再這麼做了，很大一部份原因在於很難看到成效，世界上還沒有一種評量方式能知道一個人在知識、認知領域到底有多少進步。
 那回過頭來，如果有人能做這件事，而且還持續不懈的做，那麼原因是什麼呢？自虐？無聊？我想，要不代表這個人有辦法在這件事裡面找到成就，或是因為這個人能用長遠眼光自律努力。
@@ -182,7 +430,7 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I started to
 所以我最近也開始刷題，主要目的並不是為了進公司（如果能進也很好），主要還是為了養成自己持續精進習慣，在實際生活中實踐我所知道的道理。
 這一兩個月寫的結果，是更深一層的體會到寫這些題目對於訓練自己思考很有幫助，而且也讓自己無懼於寫程式。雖然聽起來有點好笑，一個以寫程式為生的人怎麼會懼於寫程式？但事實上，透過這些訓練，讓我對寫出來的程式更有信心。
 要寫多久呢？不曉得，至少最近幾個月會是我的主要目標，希望能有更多的收穫。</description>
-			<content type="html"><![CDATA[<p>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了四五年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。</p>
+			<content type="html"><![CDATA[<p>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了三年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。</p>
 <p>這故事聽起來很狗血，好像傳統教條「努力一定會成功」，但我得到啟發並不是這個。</p>
 <p>如果一件事做起來很無聊又好像沒什麼成效，做失敗還會有心理上挫敗，那麼一般情況下人會想做嗎？很大概率是不會吧，就像讀書這種事，出了學校之後很少有人會願意再這麼做了，很大一部份原因在於很難看到成效，世界上還沒有一種評量方式能知道一個人在知識、認知領域到底有多少進步。</p>
 <p>那回過頭來，如果有人能做這件事，而且還持續不懈的做，那麼原因是什麼呢？自虐？無聊？我想，要不代表這個人有辦法在這件事裡面找到成就，或是因為這個人能用長遠眼光自律努力。</p>

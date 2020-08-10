@@ -6,10 +6,24 @@
     <description>Recent content in 2020 on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 17:25:34 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2020 15:48:42 +0800</lastBuildDate>
     
 	<atom:link href="/categories/2020/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 1547 (1)</title>
+      <link>/posts/leetcode-1547-1/</link>
+      <pubDate>Mon, 10 Aug 2020 15:48:42 +0800</pubDate>
+      
+      <guid>/posts/leetcode-1547-1/</guid>
+      <description>This article is to write down some notes while solving thie problem.
+Greedy I started with this example:
+ n = 7, cuts = [1,3,4,5]
+   initial status:
+ _ _ _ _ _ _ _ 0 7    first cut at 3:
+ _ _ _ _ | _ _ _ _ _ 0 3 3 7  cost: 7 (because total length before cut is 7)</description>
+    </item>
     
     <item>
       <title>Raise Coverate Rate to 80</title>

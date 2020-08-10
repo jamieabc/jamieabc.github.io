@@ -6,10 +6,24 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 08 Mar 2020 17:25:34 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2020 15:48:42 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 1547 (1)</title>
+      <link>/posts/leetcode-1547-1/</link>
+      <pubDate>Mon, 10 Aug 2020 15:48:42 +0800</pubDate>
+      
+      <guid>/posts/leetcode-1547-1/</guid>
+      <description>This article is to write down some notes while solving thie problem.
+Greedy I started with this example:
+ n = 7, cuts = [1,3,4,5]
+   initial status:
+ _ _ _ _ _ _ _ 0 7    first cut at 3:
+ _ _ _ _ | _ _ _ _ _ 0 3 3 7  cost: 7 (because total length before cut is 7)</description>
+    </item>
     
     <item>
       <title>Raise Coverate Rate to 80</title>
@@ -27,7 +41,7 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I started to
       <pubDate>Fri, 13 Dec 2019 20:20:35 +0800</pubDate>
       
       <guid>/posts/leetcode/</guid>
-      <description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了四五年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。
+      <description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了三年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。
 這故事聽起來很狗血，好像傳統教條「努力一定會成功」，但我得到啟發並不是這個。
 如果一件事做起來很無聊又好像沒什麼成效，做失敗還會有心理上挫敗，那麼一般情況下人會想做嗎？很大概率是不會吧，就像讀書這種事，出了學校之後很少有人會願意再這麼做了，很大一部份原因在於很難看到成效，世界上還沒有一種評量方式能知道一個人在知識、認知領域到底有多少進步。
 那回過頭來，如果有人能做這件事，而且還持續不懈的做，那麼原因是什麼呢？自虐？無聊？我想，要不代表這個人有辦法在這件事裡面找到成就，或是因為這個人能用長遠眼光自律努力。
