@@ -14,13 +14,13 @@
 			<pubDate>Mon, 10 Aug 2020 15:48:42 +0800</pubDate>
 			
 			<guid>/posts/leetcode-1547-1/</guid>
-			<description>This article is to write down some notes while solving thie problem.
+			<description>This article is to write down some notes while solving this problem.
 Greedy I started with this example:
  n = 7, cuts = [1,3,4,5]
    initial status:
  _ _ _ _ _ _ _ 0 7    first cut at 3:
  _ _ _ _ | _ _ _ _ _ 0 3 3 7  cost: 7 (because total length before cut is 7)</description>
-			<content type="html"><![CDATA[<p>This article is to write down some notes while solving thie <a href="https://leetcode.com/problems/minimum-cost-to-cut-a-stick/">problem</a>.</p>
+			<content type="html"><![CDATA[<p>This article is to write down some notes while solving this <a href="https://leetcode.com/problems/minimum-cost-to-cut-a-stick/">problem</a>.</p>
 <h1 id="greedy">Greedy</h1>
 <p>I started with this example:</p>
 <blockquote>

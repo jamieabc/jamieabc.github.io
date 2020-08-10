@@ -17,7 +17,7 @@
       <pubDate>Mon, 10 Aug 2020 15:48:42 +0800</pubDate>
       
       <guid>/posts/leetcode-1547-1/</guid>
-      <description>This article is to write down some notes while solving thie problem.
+      <description>This article is to write down some notes while solving this problem.
 Greedy I started with this example:
  n = 7, cuts = [1,3,4,5]
    initial status:
