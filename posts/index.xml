@@ -190,15 +190,15 @@ with an heurestic: for every interval, choose cut as close to mid as possible.</
 </li>
 <li>
 <p>2 cuts</p>
-<p>Where to choose doesn&rsquo;t matter, since order is interchangeable in 2 cuts conditon, take 30 as example, cuts: [10, 20]</p>
+<p>choose the one that is closer to midddle, take n = 30 cuts = [5, 18] as an example:</p>
 <ul>
 <li>
-<p>cuts [10, 20]</p>
-<p>first cost 30, second cost 10, total 40</p>
+<p>cuts [5, 18]</p>
+<p>cost = 30 + 25 = 55</p>
 </li>
 <li>
-<p>cuts [20, 10]</p>
-<p>first cost 30, second cost 10, total 40</p>
+<p>cuts [18, 5]</p>
+<p>cost = 30 + 18 = 48</p>
 </li>
 </ul>
 </li>
