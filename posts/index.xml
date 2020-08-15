@@ -5,8 +5,120 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Mon, 10 Aug 2020 15:48:42 +0800</lastBuildDate>
+		<lastBuildDate>Sat, 15 Aug 2020 12:43:05 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Leetcode 1547 (2)</title>
+			<link>/posts/leetcode-1547-2/</link>
+			<pubDate>Sat, 15 Aug 2020 12:43:05 +0800</pubDate>
+			
+			<guid>/posts/leetcode-1547-2/</guid>
+			<description>Thinking After brute force to find a solution and think about this proble, I have some other observations.
+Initially I have the idea to choosing closest middle cut in range, and it fails to guarantee always global optimal result.
+More specifically, the heuristic fails at this test case: n = 30, cuts = [5, 7, 13, 15, 18, 25, 26, 29]
+According to find closest middle cut, it will choose 15 as first cut since it&amp;rsquo;s the the half of 30, and best min cuts under 15 is 94, one of the possible outcome is [15, 7, 5, 13, 25, 26, 29, 18]</description>
+			<content type="html"><![CDATA[<h1 id="thinking">Thinking</h1>
+<p>After brute force to find a solution and think about this proble, I have some other observations.</p>
+<p>Initially I have the idea to choosing closest middle cut in range, and it fails to guarantee always global optimal result.</p>
+<p>More specifically, the heuristic fails at this test case:
+<code>n = 30, cuts = [5, 7, 13, 15, 18, 25, 26, 29]</code></p>
+<p>According to find closest middle cut, it will choose 15 as first cut since it&rsquo;s the the half of 30, and best min cuts under 15 is 94, one of the possible outcome is [15, 7, 5, 13, 25, 26, 29, 18]</p>
+<p>But global minimum cost is 92 when 18 is first cut, one of possible outcome is [18, 7, 5, 13, 15, 25, 29, 26]</p>
+<h1 id="observations">Observations</h1>
+<p>I guess it&rsquo;s somehow relates to nature of this problem: <code>exact order of each cut is not important, relatioships among separated cut groups matters</code></p>
+<p>In previous example of <code>n = 30, cuts = [5, 7, 13, 15, 18, 25, 26, 29]</code>, several minimum cost to 94 when first cut is 18:</p>
+<blockquote>
+<p>[18 7 5 13 15 25 26 29]</p>
+</blockquote>
+<blockquote>
+<p>[18 25 7 5 13 15 26 29]</p>
+</blockquote>
+<blockquote>
+<p>[18 25 29 7 5 26 13 15]</p>
+</blockquote>
+<blockquote>
+<p>[18 7 25 26 13 5 15 29]</p>
+</blockquote>
+<blockquote>
+<p>&hellip;</p>
+</blockquote>
+<p>For this problem, minimum cost only occurs when first cut is 18, and 15 should be cut after 13, etc.</p>
+<p>I also try to simplify the problem as follows:</p>
+<ul>
+<li>
+<p>for cut count = 2, choose the cut close to middle first</p>
+<ul>
+<li>
+<p>n = 20, cuts = [5, 13]</p>
+<ul>
+<li>cuts: [5, 13], cost = 20 + 15</li>
+<li>cuts: [13, 5], cost = 20 + 13</li>
+</ul>
+<p>choose 13 first because it&rsquo;s closer to middle (10)</p>
+</li>
+<li>
+<p>n = 30, cuts = [5, 10]</p>
+<ul>
+<li>cuts: [5, 10], cost = 30 + 25</li>
+<li>cuts: [10, 5], cost = 30 + 10</li>
+</ul>
+<p>choose 10 first because it&rsquo;s closer to middle (15)</p>
+</li>
+<li>
+<p>n = 30, cuts = [18, 25]</p>
+<ul>
+<li>cuts: [18, 25], cost = 30 + 12</li>
+<li>cuts: [25, 18], cost = 30 + 25</li>
+</ul>
+<p>choose 18 first because it&rsquo;s closer to middle (15)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>for cuts count = 3, to minimize overall cost is to minimize next cut, choose cut close to middle is still best choice</p>
+<ul>
+<li>
+<p>n = 30, cuts = [1, 2, 3]</p>
+<ul>
+<li>cuts: [1, 2, 3], cost = 30 + 29 + 18 - (1)</li>
+<li>cuts: [2, 1, 3], cost = 30 + 2 + 28 - (2)</li>
+<li>cuts: [3, 2, 1], cost = 30 + 2 + 1 - (3)</li>
+</ul>
+<p>(2) is smaller than (1) is because cost to cut 1 is reduced</p>
+<p>(3) is smaller than (2) is because cost to cut 3 is reduced</p>
+<p>choose 3 first because it closer to middle (15)</p>
+</li>
+<li>
+<p>n = 30, cuts = [16, 24, 7]</p>
+<ul>
+<li>cuts: [7, 16, 24], cost = 30 + 23 + 14</li>
+<li>cuts: [16, 7, 24], cost = 30 + 16 + 14</li>
+<li>cuts: [24, 7, 16], cost = 30 + 24 + 17</li>
+</ul>
+<p>choose 16 first because it&rsquo;s closer to middle (15)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>But the heuristic to choose cut close to middle doesn&rsquo;t always guarantee to have global optimal solution in the situation of 4 cuts, take <code>n = 30, cuts = [10, 15, 18, 25]</code> as example:</p>
+<ul>
+<li>cuts: [15, 10, 25, 18], cost = 30 + 15 + 15 + 10 = 60 + 10 - (1)</li>
+<li>cuts: [18, 10, 25, 15], cost = 30 + 18 + 12 + 8 = 60 + 8 - (2)</li>
+</ul>
+<p>(2) has smaller cost than (1) because cost of 15 is reduced.</p>
+<p>I found that if there are 4 cuts, in the situation that first cut separate rest of cuts into 2 groups (in the situation at least one cut exist in these 2 groups), assume c is the first cut in middle:</p>
+<pre><code>_  _  ... _ | _  _ ... _  _
+0         c   c           n
+</code></pre><p>since at least one cut exist, minimum cost will be determined by the group has 2 cuts because total 4 cuts, first cut is determined, there might be 2 conditions: <code>[x, c, y, z]</code> or <code>[x, y, c, z]</code></p>
+<ul>
+<li>[x, c, y, z] since x &amp; y exist, cost = n + (n/2) + (n/2) + (cost to cut y or z)</li>
+<li>[x, y, c, z] since x &amp; z exist, cost = n + (n/2) + (n/2) + (cost to cut x or y)</li>
+</ul>
+<p>In this counter example, choosing middle cut doesn&rsquo;t always guarantee the global optimal result, since minimum cost is determined by the last cut (y, z in [x, c, y, z] or x, y in [x, y, c, z]), which is not considered when choosing fist middle cut c</p>
+<p>So, after this, problem can only be solved by brute force or dp.</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Leetcode 1547 (1)</title>

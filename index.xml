@@ -6,10 +6,22 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Aug 2020 15:48:42 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 15 Aug 2020 12:43:05 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 1547 (2)</title>
+      <link>/posts/leetcode-1547-2/</link>
+      <pubDate>Sat, 15 Aug 2020 12:43:05 +0800</pubDate>
+      
+      <guid>/posts/leetcode-1547-2/</guid>
+      <description>Thinking After brute force to find a solution and think about this proble, I have some other observations.
+Initially I have the idea to choosing closest middle cut in range, and it fails to guarantee always global optimal result.
+More specifically, the heuristic fails at this test case: n = 30, cuts = [5, 7, 13, 15, 18, 25, 26, 29]
+According to find closest middle cut, it will choose 15 as first cut since it&amp;rsquo;s the the half of 30, and best min cuts under 15 is 94, one of the possible outcome is [15, 7, 5, 13, 25, 26, 29, 18]</description>
+    </item>
     
     <item>
       <title>Leetcode 1547 (1)</title>
