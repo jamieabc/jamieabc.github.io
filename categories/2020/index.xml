@@ -6,10 +6,21 @@
     <description>Recent content in 2020 on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Aug 2020 12:43:05 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 21 Aug 2020 20:19:13 +0800</lastBuildDate>
     
 	<atom:link href="/categories/2020/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 1552 (1)</title>
+      <link>/posts/leetcode-1552-1/</link>
+      <pubDate>Fri, 21 Aug 2020 20:19:13 +0800</pubDate>
+      
+      <guid>/posts/leetcode-1552-1/</guid>
+      <description>This article tries to write down some notes while trying to solve problem 1552.
+I think this problem can be restated as follows: given some positive integers with total size n, pick m numbers such that minimum distance among each selected is maximum.
+When first see this problem, I think it&amp;rsquo;s a knapsack problem: every number will be selected or not, find those possible combinations (pick m from n), calculate minimum distance, choose maximum from them.</description>
+    </item>
     
     <item>
       <title>Leetcode 1547 (2)</title>
