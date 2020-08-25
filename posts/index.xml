@@ -5,8 +5,46 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Fri, 21 Aug 2020 20:19:13 +0800</lastBuildDate>
+		<lastBuildDate>Tue, 25 Aug 2020 20:25:19 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Leetcode 1552 (2)</title>
+			<link>/posts/leetcode-1552-2/</link>
+			<pubDate>Tue, 25 Aug 2020 20:25:19 +0800</pubDate>
+			
+			<guid>/posts/leetcode-1552-2/</guid>
+			<description>This article tries to write down some notes while trying to solve problem 1552.
+After some days of thinking, I finally understand why this is a binary search problem.
+Thinking Didn&amp;rsquo;t think of binary search because I miss some details about this problem:
+ To get maximum of minimum distance among selected numbers, smallest &amp;amp; largest numbers will definited being selected, because choosing them provides maximum range to distribute distance.    Once smallest &amp;amp; largest numbers are selected, theoretically maximum distance could be upper bounded to (largest - smallest) / (selected - 1)</description>
+			<content type="html"><![CDATA[<p>This article tries to write down some notes while trying to solve problem <a href="https://leetcode.com/problems/magnetic-force-between-two-balls/">1552</a>.</p>
+<p>After some days of thinking, I finally understand why this is a binary search problem.</p>
+<h1 id="thinking">Thinking</h1>
+<p>Didn&rsquo;t think of binary search because I miss some details about this problem:</p>
+<ul>
+<li>To get maximum of minimum distance among selected numbers, smallest &amp; largest numbers will definited being selected, because choosing them provides maximum range to distribute distance.</li>
+</ul>
+<ul>
+<li>
+<p>Once smallest &amp; largest numbers are selected, theoretically maximum distance could be upper bounded to <code>(largest - smallest) / (selected - 1)</code></p>
+</li>
+<li>
+<p>Since maximum possible distance is decided, use binary search to find if a chosen distance is possible. If it&rsquo;s possible search upper half of the range, otherwise, search bottom half of the range.</p>
+</li>
+</ul>
+<h1 id="example">Example</h1>
+<p>Take numbers = [1, 2, 3, 4, 7, 12], selected = 3 as an example:</p>
+<p>Distance can only come from smallest(1) and largest(12) being selected. When 1 &amp; 12 are selected, theoretically maximum distance is also determined: <code>(12-1)/(3-1) = 5</code></p>
+<p>mid of 0-5 is 2, try distance 2: <code>1, 3, 7</code> meets</p>
+<p>mid of 2-5 is 3, try distance 3: <code>1, 4, 7</code> meets</p>
+<p>half of 3-5 is 4, try distance 4: <code>1, 7, 12</code> meets</p>
+<p>half of 4-5 is 5(close to upper), try distance 5: <code>1, 7, 12</code> meets</p>
+<p>so final answer is 5.</p>
+<h1 id="summary">Summary</h1>
+<p>After noticing some details, the problem solution time complexity can be reduced from O(m*n^2) to O(n log n). In computer world, best solution dominates!</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Leetcode 1552 (1)</title>

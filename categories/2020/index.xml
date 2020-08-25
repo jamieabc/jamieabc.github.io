@@ -6,10 +6,22 @@
     <description>Recent content in 2020 on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Aug 2020 20:19:13 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2020 20:25:19 +0800</lastBuildDate>
     
 	<atom:link href="/categories/2020/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Leetcode 1552 (2)</title>
+      <link>/posts/leetcode-1552-2/</link>
+      <pubDate>Tue, 25 Aug 2020 20:25:19 +0800</pubDate>
+      
+      <guid>/posts/leetcode-1552-2/</guid>
+      <description>This article tries to write down some notes while trying to solve problem 1552.
+After some days of thinking, I finally understand why this is a binary search problem.
+Thinking Didn&amp;rsquo;t think of binary search because I miss some details about this problem:
+ To get maximum of minimum distance among selected numbers, smallest &amp;amp; largest numbers will definited being selected, because choosing them provides maximum range to distribute distance.    Once smallest &amp;amp; largest numbers are selected, theoretically maximum distance could be upper bounded to (largest - smallest) / (selected - 1)</description>
+    </item>
     
     <item>
       <title>Leetcode 1552 (1)</title>
