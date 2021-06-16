@@ -5,8 +5,33 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Tue, 25 Aug 2020 20:25:19 +0800</lastBuildDate>
+		<lastBuildDate>Wed, 16 Jun 2021 21:58:12 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Hyrum&#39;s Law</title>
+			<link>/posts/hyrum-law/</link>
+			<pubDate>Wed, 16 Jun 2021 21:58:12 +0800</pubDate>
+			
+			<guid>/posts/hyrum-law/</guid>
+			<description>這章在講 scalability，裡面提到一個概念 Hyrum&amp;rsquo;s Law (Hyrum 是 Google 工程師):
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+我在這部影片中聽到原作者的另一個例子：在某個 c++ 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。</description>
+			<content type="html"><![CDATA[<p>這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):</p>
+<blockquote>
+<p>With a sufficient number of users of an API,
+it does not matter what you promise in the contract:
+all observable behaviors of your system
+will be depended on by somebody.</p>
+</blockquote>
+<p>這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。</p>
+<p>我在這部<a href="https://www.youtube.com/watch?v=5Wdgjw6IGDM">影片</a>中聽到原作者的另一個例子：在某個 c++ 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。</p>
+<p>愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。</p>
+<p>依賴無處不在</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Leetcode 1552 (2)</title>
