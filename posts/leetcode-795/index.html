@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Leetcode 795">
+<meta itemprop="description" content="Program description at here
+Although I know this problem can be solved in linear time, it still takes me a while to fiture out the optimal solution.
+Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
+[1, 2, 1, 3, 1, 4] ^ start from here, 1 &lt; 2 not in range, total 4 sub-arrays meet criteria: [1, 2], [1, 2, 1], [1, 2, 1, 3], [1, 2, 1, 3, 1] ^ start from here, 2 &gt;= 2 &amp;&amp; 2 &lt;= 3 in range, total 4 sub-arrays meet criteria: [2], [2, 1], [2, 1, 3], [2, 1, 3, 1] ^ start from here, 1 &lt; 2, not in range, total 2 sub-arrays meet criteria: [1, 3], [1, 3, 1] ^ start from here, 3 &gt;= 2 &amp;&amp; 3 &lt;= 3 in range, total 2 sub-arrays meet criteria: [3], [3, 1] ^ start from here, 1 &lt; 2 not in range, total 0 sub-arrays meet criteria It&rsquo;s obvious to check valid sub-arrays start from specific index, this way guarantees no duplicate count exists.">
+<meta itemprop="datePublished" content="2021-06-20T14:12:16&#43;08:00" />
+<meta itemprop="dateModified" content="2021-06-20T14:12:16&#43;08:00" />
+<meta itemprop="wordCount" content="1399">
+
+
+
+<meta itemprop="keywords" content="Programming,Leetcode,Algorithm," /><meta property="og:title" content="Leetcode 795" />
+<meta property="og:description" content="Program description at here
+Although I know this problem can be solved in linear time, it still takes me a while to fiture out the optimal solution.
+Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
+[1, 2, 1, 3, 1, 4] ^ start from here, 1 &lt; 2 not in range, total 4 sub-arrays meet criteria: [1, 2], [1, 2, 1], [1, 2, 1, 3], [1, 2, 1, 3, 1] ^ start from here, 2 &gt;= 2 &amp;&amp; 2 &lt;= 3 in range, total 4 sub-arrays meet criteria: [2], [2, 1], [2, 1, 3], [2, 1, 3, 1] ^ start from here, 1 &lt; 2, not in range, total 2 sub-arrays meet criteria: [1, 3], [1, 3, 1] ^ start from here, 3 &gt;= 2 &amp;&amp; 3 &lt;= 3 in range, total 2 sub-arrays meet criteria: [3], [3, 1] ^ start from here, 1 &lt; 2 not in range, total 0 sub-arrays meet criteria It&rsquo;s obvious to check valid sub-arrays start from specific index, this way guarantees no duplicate count exists." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/leetcode-795/" />
+<meta property="article:published_time" content="2021-06-20T14:12:16+08:00" />
+<meta property="article:modified_time" content="2021-06-20T14:12:16+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Leetcode 795"/>
+<meta name="twitter:description" content="Program description at here
+Although I know this problem can be solved in linear time, it still takes me a while to fiture out the optimal solution.
+Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
+[1, 2, 1, 3, 1, 4] ^ start from here, 1 &lt; 2 not in range, total 4 sub-arrays meet criteria: [1, 2], [1, 2, 1], [1, 2, 1, 3], [1, 2, 1, 3, 1] ^ start from here, 2 &gt;= 2 &amp;&amp; 2 &lt;= 3 in range, total 4 sub-arrays meet criteria: [2], [2, 1], [2, 1, 3], [2, 1, 3, 1] ^ start from here, 1 &lt; 2, not in range, total 2 sub-arrays meet criteria: [1, 3], [1, 3, 1] ^ start from here, 3 &gt;= 2 &amp;&amp; 3 &lt;= 3 in range, total 2 sub-arrays meet criteria: [3], [3, 1] ^ start from here, 1 &lt; 2 not in range, total 0 sub-arrays meet criteria It&rsquo;s obvious to check valid sub-arrays start from specific index, this way guarantees no duplicate count exists."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Leetcode 795</title>
+	<link rel="stylesheet" href="/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="/">Cognition Limits Imagination</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="/posts/">Posts</a>
+				<a href="/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/jamieabc" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="/posts/">Posts</a></li>
+			<li><a href="/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jun 20, 2021</span></div>
+				<h1>Leetcode 795</h1>
+			</header>
+			<div class="content">
+				<p>Program description at <a href="https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/" title="795">here</a></p>
+<p>Although I know this problem can be solved in linear time, it still takes me a while to fiture out the optimal solution.</p>
+<p>Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.</p>
+<pre><code>[1, 2, 1, 3, 1, 4]
+ ^ start from here, 1 &lt; 2 not in range, total 4 sub-arrays meet criteria: [1, 2], [1, 2, 1], [1, 2, 1, 3], [1, 2, 1, 3, 1]
+ 
+    ^ start from here, 2 &gt;= 2 &amp;&amp; 2 &lt;= 3 in range, total 4 sub-arrays meet criteria: [2], [2, 1], [2, 1, 3], [2, 1, 3, 1]
+    
+       ^ start from here, 1 &lt; 2, not in range, total 2 sub-arrays meet criteria: [1, 3], [1, 3, 1]
+       
+          ^ start from here, 3 &gt;= 2 &amp;&amp; 3 &lt;= 3 in range, total 2 sub-arrays meet criteria: [3], [3, 1]
+          
+             ^ start from here, 1 &lt; 2 not in range, total 0 sub-arrays meet criteria
+</code></pre><p>It&rsquo;s obvious to check valid sub-arrays start from specific index, this way guarantees no duplicate count exists.</p>
+<h2 id="solution-1---time-complexity-on-space-complexity-on-">Solution 1 - time complexity O(n), space complexity O(n)<a href="#solution-1---time-complexity-on-space-complexity-on-" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>By above observation, to count all valid sub-arrays, need two variables <code>start</code> and <code>end</code> to denote that every number in this interval is smaller all equal within expected range. Whole array can be separted into several non-overlapping intervals.</p>
+<p>Taking an example of array [1, 4, 1, 3, 1, 4, 1, 2], maximum range from 2 ~ 3.</p>
+<pre><code>array [1, 4, 1, 3, 1, 4, 1, 2] can be separated into 3 intervals [1], [1, 3, 1], [1, 2], because 4 out of range 2~3, means no sub-array can include any position has 4 in this example
+          x           x
+</code></pre><p>Since separated intervals has no overlap area, original array being cut into smaller sub-problems, thus following example is demonstrated in a way that already found intervals without any number out of range.</p>
+<p>After candidate intervals are found, it&rsquo;s time to caluclate valid sub-arrays in this interval. If a number is less than expected range (2~3 in above example), itself cannot form a valid sub-array, so this number needs to include numbers after to at least one number in range</p>
+<pre><code>[1, 1, 1, 2, 1], range 2 ~ 3
+ ^ this number cannot exist itself alone, because [1] has no number in range 2 ~ 3
+   include next number [1, 1] has no number in range 2 ~ 3
+   include next number [1, 1, 1] has no number in range 2 ~ 3
+   include next number [1, 1, 1, 2] has a number 2 in range 2 ~ 3
+   include next number [1, 1, 1, 2, 1] has a number 2 in range 2 ~ 3
+   
+total 2 valid sub-arrays that meets criteria
+</code></pre><p>For above behavior, each iteration needs to know what&rsquo;s the first number afterwards meets criteria. As long as position is found, number of sub-arrays meet criteria can be count. The way to find numbers in range can be stored in a queue, whole behavior is demonstrated below.</p>
+<pre><code>[1, 2, 1, 3, 1], range 2 ~ 3
+ ^ not in range, skip,                            queue: []
+    ^ in range, put index into queue,             queue: [1]
+       ^ not in range, skip,                      queue: [1]
+          ^ in range, put index into queue,       queue: [1, 3]
+             ^ not in range, skip,                queue: [1, 3]
+             
+start from beginning of interval:
+index 0, queue [1, 3],  0 &lt; 1, the closest first index meets criteria is 1, which means from index 1 ~ last index could all be valid sub-arrays, valid sub-arrays = total_length_from_index_0 - invalid_length = 5 - 1 = 4
+
+index 1, queue [1, 3],  1 == 1, the closest first index meets criteria is self, which means from index 1 ~ last index could all be valid sub-arrays, valid sub-arrays = total_length_from_idnex_1 - invalid_length = 4 - 0 = 4
+       , also pop index 1 from queue because remain numbers has larger index, index 1 will not be used anymore
+
+index 2, queue [3], 2 &lt; 1, the closest first index meets criteria is 3, which means from index 3 ~ last index could all be valid sub-arrays, valid sub-arrays = total_length_from_idnex_2 - invalid_length = 3 - 1 = 2
+
+index 3, queue [3], 3 == 3, the closest first index meets criteria is self, which means from index 3 ~ last index could all be valid sub-arrays, valid sub-arrays = total_length_from_idnex_3 - invalid_length = 2 - 0 = 2
+       , also pop index 3 from queue because remain numbers has larger index, index 3 will not be used anymore
+
+index 4, queue [], there's no closest first index meets criteria, valid sub-arrays = 0
+
+start from beginning of array, total valid sub-arrays = 4 + 4 + 2 + 2 + 0
+</code></pre><p>Sample code for golang</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// time complextiy: O(n), space complexity: O(n)
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">numSubarrayBoundedMax</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">left</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">right</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="nx">n</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span>
+
+    <span class="c1">// in case array reaches end with intervals meet criteria, create
+</span><span class="c1"></span>    <span class="c1">// a sentinel at end
+</span><span class="c1"></span>    <span class="k">if</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="nx">right</span> <span class="p">{</span>
+        <span class="nx">nums</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">right</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nx">n</span><span class="o">++</span>
+    <span class="p">}</span>
+
+    <span class="nx">queue</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">count</span><span class="p">,</span> <span class="nx">prev</span> <span class="kt">int</span>
+
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nx">left</span> <span class="o">&amp;&amp;</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="nx">right</span> <span class="p">{</span>
+            <span class="nx">queue</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">queue</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">&gt;</span> <span class="nx">right</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="nx">j</span> <span class="o">:=</span> <span class="nx">prev</span><span class="p">;</span> <span class="nx">j</span> <span class="p">&lt;</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">queue</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+                    <span class="k">break</span>
+                <span class="p">}</span>
+
+                <span class="k">if</span> <span class="nx">j</span> <span class="p">&lt;</span> <span class="nx">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">{</span>
+                    <span class="nx">count</span> <span class="o">+=</span> <span class="nx">i</span><span class="o">-</span><span class="nx">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">queue</span> <span class="p">=</span> <span class="nx">queue</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                    <span class="nx">count</span> <span class="o">+=</span> <span class="nx">i</span><span class="o">-</span><span class="nx">j</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="nx">prev</span> <span class="p">=</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">count</span>
+<span class="p">}</span>
+</code></pre></div><p>Sample code for c++</p>
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">numSubarrayBoundedMax</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">queue</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        
+    <span class="c1">// add sentinel
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">nums</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">right</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+      <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+        
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">queue</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="n">queue</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">count</span> <span class="o">+=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">queue</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+                    
+          <span class="k">if</span> <span class="p">(</span><span class="n">queue</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">queue</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+                
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+        
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div><h2 id="solution-2---time-complexity-on-space-complexity-o1-">Solution 2 - time complexity O(n), space complexity O(1)<a href="#solution-2---time-complexity-on-space-complexity-o1-" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>For solution 1, it takes extra spec to store location of numbers because when traversing from beginning, valid sub-arrays are determined by afterwars number in range. To reduce this extra space, if iterate from end of array, then there&rsquo;s no need to store whole indexes.</p>
+<pre><code>[1, 2, 1, 3, 1], range 2 ~ 3
+             ^ not in range, don't count
+
+          ^ in range, there are 2 sub-arrays start from index 3, [3] and [3, 1], store this value 2
+
+       ^ not int range, use previous valid sub-arrays 2, because 1 is not in range, it needs to depend on number to right which is in range, so valid sub-arrays is the same as previous calculation
+
+    ^ in range, there are 4 sub-arrays start from index 1, [2], [2, 1], [2, 1, 3], [2, 1, 3, 1], store this value 4
+
+ ^ not int range, use previous valid sub-arrays 4, because 1 is not in range, it needs to depend on number to right which is in range, so valid sub-arrays is the same as previous calculation
+ 
+start from end of array, total valid sub-arrays = 0 + 2 + 2 + 4 + 4 = 12
+</code></pre><p>This way, no extra space is needed</p>
+<p>Sample code for golang</p>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">numSubarrayBoundedMax</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">left</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">right</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">count</span><span class="p">,</span> <span class="nx">dist</span> <span class="kt">int</span>
+  <span class="nx">n</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span>
+  <span class="nx">last</span> <span class="o">:=</span> <span class="nx">n</span> <span class="c1">// in case there are number in criteria at last
+</span><span class="c1"></span>
+  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">&gt;</span> <span class="nx">right</span> <span class="p">{</span>
+      <span class="nx">dist</span> <span class="p">=</span> <span class="mi">0</span>
+      <span class="nx">last</span> <span class="p">=</span> <span class="nx">i</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nx">left</span> <span class="o">&amp;&amp;</span> <span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="nx">right</span> <span class="p">{</span>
+      <span class="nx">dist</span> <span class="p">=</span> <span class="nx">last</span> <span class="o">-</span> <span class="nx">i</span>
+      <span class="p">}</span>
+
+    <span class="nx">count</span> <span class="o">+=</span> <span class="nx">dist</span>
+    <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">count</span>
+<span class="p">}</span>
+</code></pre></div><p>Smaple code for c++</p>
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">numSubarrayBoundedMax</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">last</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">last</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="n">count</span> <span class="o">+=</span> <span class="n">dist</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/programming">Programming</a></span><span class="tag"><a href="/tags/leetcode">Leetcode</a></span><span class="tag"><a href="/tags/algorithm">Algorithm</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1399 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-06-20 14:12</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="/posts/hyrum-law/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Hyrum&#39;s Law</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2021 <a href="/">Aaron Chang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="/js/bundle.min.4a9a0ac3d2217822c7865b4161e6c2a71de1d70492264337755427898dd718f6.js" integrity="sha256-SpoKw9IheCLHhltBYebCpx3h1wSSJkM3dVQniY3XGPY=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>
