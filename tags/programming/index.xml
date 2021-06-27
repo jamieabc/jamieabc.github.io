@@ -6,10 +6,22 @@
     <description>Recent content in Programming on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jun 2021 14:12:16 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 27 Jun 2021 18:40:21 +0800</lastBuildDate>
     
 	<atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bug Factor</title>
+      <link>/posts/bus-factor/</link>
+      <pubDate>Sun, 27 Jun 2021 18:40:21 +0800</pubDate>
+      
+      <guid>/posts/bus-factor/</guid>
+      <description>The number of people that need to get hit by a bus before your project is completely doomed.
+ 這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
+大部份人的天性是希望等到程式碼寫到完美後再發佈，但只有一個人知道的專案除了容易後繼無人外，缺乏討論、溝通的專案很可能在設計初期就埋藏了不可彌補的錯誤。
+常見的 Documentation，Pair pairgramming，Code review 都可以避免知識只存在少數人腦中的情況。</description>
+    </item>
     
     <item>
       <title>Leetcode 795</title>

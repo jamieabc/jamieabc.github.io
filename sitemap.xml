@@ -3,6 +3,41 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/posts/bus-factor/</loc>
+    <lastmod>2021-06-27T18:40:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2021-06-27T18:40:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-06-27T18:40:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/programming/</loc>
+    <lastmod>2021-06-27T18:40:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/reading/</loc>
+    <lastmod>2021-06-27T18:40:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/software-engineering-at-google/</loc>
+    <lastmod>2021-06-27T18:40:21+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-06-27T18:40:21+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/2021/</loc>
     <lastmod>2021-06-20T14:12:16+08:00</lastmod>
   </url>
@@ -18,11 +53,6 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2021-06-20T14:12:16+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/leetcode/</loc>
     <lastmod>2021-06-20T14:12:16+08:00</lastmod>
   </url>
@@ -33,27 +63,7 @@
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2021-06-20T14:12:16+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/programming/</loc>
-    <lastmod>2021-06-20T14:12:16+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-06-20T14:12:16+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/posts/hyrum-law/</loc>
-    <lastmod>2021-06-16T21:58:12+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/software-engineering-at-google/</loc>
     <lastmod>2021-06-16T21:58:12+08:00</lastmod>
   </url>
   
