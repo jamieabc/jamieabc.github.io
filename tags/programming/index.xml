@@ -6,10 +6,23 @@
     <description>Recent content in Programming on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Jun 2021 18:40:21 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 29 Jun 2021 19:53:14 +0800</lastBuildDate>
     
 	<atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>One and Half Year</title>
+      <link>/posts/one-and-half-year/</link>
+      <pubDate>Tue, 29 Jun 2021 19:53:14 +0800</pubDate>
+      
+      <guid>/posts/one-and-half-year/</guid>
+      <description>不知不覺，刷題一年半了，從一開始的好奇到有點厭煩，如今習以為常。
+有段時間非常在意效率，今天寫了幾題各花了多少時間；有段時間比較怠惰，時間一到就休息。
+過去的記憶開始模糊，這一年半好像很累，但又好像轉瞬即逝，最後定格的，是某次上班超累，下班完坐在星巴克，頭痛愈裂，想寫題目卻想不出任何解法。
+細節已經不太清楚，只記得那個感覺…只記得努力。
+我想，人還是低調、謙虛點，能走的比較遠吧。</description>
+    </item>
     
     <item>
       <title>Bus Factor</title>
@@ -113,7 +126,7 @@ These 2 packges with 0% and 20% unit test coverate rate at the time I started to
       <pubDate>Fri, 13 Dec 2019 20:20:35 +0800</pubDate>
       
       <guid>/posts/leetcode/</guid>
-      <description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了三年，每年都面試美國 FAAG 這幾間大公司，最近成功進入其中一間。
+      <description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了三年，每年都面試美國 FAANG 這幾間大公司，最近成功進入其中一間。
 這故事聽起來很狗血，好像傳統教條「努力一定會成功」，但我得到啟發並不是這個。
 如果一件事做起來很無聊又好像沒什麼成效，做失敗還會有心理上挫敗，那麼一般情況下人會想做嗎？很大概率是不會吧，就像讀書這種事，出了學校之後很少有人會願意再這麼做了，很大一部份原因在於很難看到成效，世界上還沒有一種評量方式能知道一個人在知識、認知領域到底有多少進步。
 那回過頭來，如果有人能做這件事，而且還持續不懈的做，那麼原因是什麼呢？自虐？無聊？我想，要不代表這個人有辦法在這件事裡面找到成就，或是因為這個人能用長遠眼光自律努力。
