@@ -6,10 +6,27 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Jun 2021 19:53:14 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 06 Jul 2021 22:15:48 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>David Recardo</title>
+      <link>/posts/david-recardo/</link>
+      <pubDate>Tue, 06 Jul 2021 22:15:48 +0800</pubDate>
+      
+      <guid>/posts/david-recardo/</guid>
+      <description>李嘉圖定律：
+ 土地租金是土地使用者支付的價格，它是由壟斷性（稀缺性）決定，而不是由地主在上面做的投資和改良成本決定；它的價格受限於租用者（農民）能夠承擔的價格。
+ 空氣因為供給無限，所以沒有任何價值；土地從某方面來說也是無限的（地球上還有很多地方的土地未經開發、居住），但不同地段租金有極大差異，為什麼同樣是自然資源，前者沒有任何價值，而後者有極大差異？
+李嘉圖給出了一個解釋，土地租金由兩個因素決定：收入差、和其他投資回報對比。
+第一個因素來自於自身產出，一片土地有充足水量，能產出的農作物會比貧瘠土地上所產出的農作物多，於是收入差別造成了租金差別。這個原因也同樣適用於人流多的地段、交通發達地段。
+第二個因素來自於跟其它投資相比，如果買股票的回報率大於炒房，那麼錢會往股票湧入，於是投入到房地產的資金減少，土地價格下降，造成土地的投資回報率上升。
+這個定律並不只存在於自然資源，只要是稀缺資源都適用。隨著網路普及，資訊的流通讓大眾更容易知道什麼是稀缺品，於是在這個時候，同樣商品，不同品質價格會有極大的差異，Iphone、AWS、疫苗、有名講師、著名歌手演唱會門票、台鐵訂票系統，等等。
+只要資源稀缺（台灣某些路段的火車），價差就會持續存在。
+後面兩句也很關鍵，代表著只要別人成功（有辦法取得高獲利），自己就會成功（租金上漲），好像很雞湯的解釋。</description>
+    </item>
     
     <item>
       <title>One and Half Year</title>
@@ -118,23 +135,6 @@ Greedy I started with this example:
       <guid>/posts/raise-coverate-rate-to-80/</guid>
       <description>Recently I have done raising unit tests coverage rate of 2 packages to at least 80%. Of course, high coverage rate isn&amp;rsquo;t always a gold standard to achieve, and some corner conditions are not necessray to test, so 80% seems a number that tries to demonstrate most code paths are testable.
 These 2 packges with 0% and 20% unit test coverate rate at the time I started to modify. After some refactoring, both packages&amp;rsquo; coverage rate reaches 80%.</description>
-    </item>
-    
-    <item>
-      <title>Leetcode</title>
-      <link>/posts/leetcode/</link>
-      <pubDate>Fri, 13 Dec 2019 20:20:35 +0800</pubDate>
-      
-      <guid>/posts/leetcode/</guid>
-      <description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了三年，每年都面試美國 FAANG 這幾間大公司，最近成功進入其中一間。
-這故事聽起來很狗血，好像傳統教條「努力一定會成功」，但我得到啟發並不是這個。
-如果一件事做起來很無聊又好像沒什麼成效，做失敗還會有心理上挫敗，那麼一般情況下人會想做嗎？很大概率是不會吧，就像讀書這種事，出了學校之後很少有人會願意再這麼做了，很大一部份原因在於很難看到成效，世界上還沒有一種評量方式能知道一個人在知識、認知領域到底有多少進步。
-那回過頭來，如果有人能做這件事，而且還持續不懈的做，那麼原因是什麼呢？自虐？無聊？我想，要不代表這個人有辦法在這件事裡面找到成就，或是因為這個人能用長遠眼光自律努力。
-不論那個原因，背後代表的都是與眾不同，這也是我覺得這件事難的地方。
-辜且不論 Leetcode 對於寫程式有多少幫助，或是在這個時代進入大公司到底是不是一個好選擇，如果一個人能持續努力提升，那麼在任何領域應該都能有不錯表現。
-所以我最近也開始刷題，主要目的並不是為了進公司（如果能進也很好），主要還是為了養成自己持續精進習慣，在實際生活中實踐我所知道的道理。
-這一兩個月寫的結果，是更深一層的體會到寫這些題目對於訓練自己思考很有幫助，而且也讓自己無懼於寫程式。雖然聽起來有點好笑，一個以寫程式為生的人怎麼會懼於寫程式？但事實上，透過這些訓練，讓我對寫出來的程式更有信心。
-要寫多久呢？不曉得，至少最近幾個月會是我的主要目標，希望能有更多的收穫。</description>
     </item>
     
   </channel>
