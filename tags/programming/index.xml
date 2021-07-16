@@ -6,10 +6,22 @@
     <description>Recent content in Programming on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Jun 2021 19:53:14 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 16 Jul 2021 23:14:09 +0800</lastBuildDate>
     
 	<atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dropbox Engineer Ladder</title>
+      <link>/posts/dropbox-engineer-ladder/</link>
+      <pubDate>Fri, 16 Jul 2021 23:14:09 +0800</pubDate>
+      
+      <guid>/posts/dropbox-engineer-ladder/</guid>
+      <description>最近 Dropbox 發布了 engineer ladder
+從 software engineer 到 quality assurance engineer，再到 reliability engineer，不同層級有著不同的標準。
+大公司有著明確制度，想要往上爬就需要滿足特定條件，一方面是學習，另一方面也是挑戰，能不能上去還是看個人。
+公司內部也有相對應文件，我想，先定好目標，比較知道缺失什麼需要補強。</description>
+    </item>
     
     <item>
       <title>One and Half Year</title>
@@ -118,23 +130,6 @@ Greedy I started with this example:
       <guid>/posts/raise-coverate-rate-to-80/</guid>
       <description>Recently I have done raising unit tests coverage rate of 2 packages to at least 80%. Of course, high coverage rate isn&amp;rsquo;t always a gold standard to achieve, and some corner conditions are not necessray to test, so 80% seems a number that tries to demonstrate most code paths are testable.
 These 2 packges with 0% and 20% unit test coverate rate at the time I started to modify. After some refactoring, both packages&amp;rsquo; coverage rate reaches 80%.</description>
-    </item>
-    
-    <item>
-      <title>Leetcode</title>
-      <link>/posts/leetcode/</link>
-      <pubDate>Fri, 13 Dec 2019 20:20:35 +0800</pubDate>
-      
-      <guid>/posts/leetcode/</guid>
-      <description>最近花了不少時間寫 Leetcode，起源說起來很簡單，有個大學同學花了三年，每年都面試美國 FAANG 這幾間大公司，最近成功進入其中一間。
-這故事聽起來很狗血，好像傳統教條「努力一定會成功」，但我得到啟發並不是這個。
-如果一件事做起來很無聊又好像沒什麼成效，做失敗還會有心理上挫敗，那麼一般情況下人會想做嗎？很大概率是不會吧，就像讀書這種事，出了學校之後很少有人會願意再這麼做了，很大一部份原因在於很難看到成效，世界上還沒有一種評量方式能知道一個人在知識、認知領域到底有多少進步。
-那回過頭來，如果有人能做這件事，而且還持續不懈的做，那麼原因是什麼呢？自虐？無聊？我想，要不代表這個人有辦法在這件事裡面找到成就，或是因為這個人能用長遠眼光自律努力。
-不論那個原因，背後代表的都是與眾不同，這也是我覺得這件事難的地方。
-辜且不論 Leetcode 對於寫程式有多少幫助，或是在這個時代進入大公司到底是不是一個好選擇，如果一個人能持續努力提升，那麼在任何領域應該都能有不錯表現。
-所以我最近也開始刷題，主要目的並不是為了進公司（如果能進也很好），主要還是為了養成自己持續精進習慣，在實際生活中實踐我所知道的道理。
-這一兩個月寫的結果，是更深一層的體會到寫這些題目對於訓練自己思考很有幫助，而且也讓自己無懼於寫程式。雖然聽起來有點好笑，一個以寫程式為生的人怎麼會懼於寫程式？但事實上，透過這些訓練，讓我對寫出來的程式更有信心。
-要寫多久呢？不曉得，至少最近幾個月會是我的主要目標，希望能有更多的收穫。</description>
     </item>
     
   </channel>

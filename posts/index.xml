@@ -5,8 +5,25 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Tue, 06 Jul 2021 22:15:48 +0800</lastBuildDate>
+		<lastBuildDate>Fri, 16 Jul 2021 23:14:09 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Dropbox Engineer Ladder</title>
+			<link>/posts/dropbox-engineer-ladder/</link>
+			<pubDate>Fri, 16 Jul 2021 23:14:09 +0800</pubDate>
+			
+			<guid>/posts/dropbox-engineer-ladder/</guid>
+			<description>最近 Dropbox 發布了 engineer ladder
+從 software engineer 到 quality assurance engineer，再到 reliability engineer，不同層級有著不同的標準。
+大公司有著明確制度，想要往上爬就需要滿足特定條件，一方面是學習，另一方面也是挑戰，能不能上去還是看個人。
+公司內部也有相對應文件，我想，先定好目標，比較知道缺失什麼需要補強。</description>
+			<content type="html"><![CDATA[<p>最近 Dropbox 發布了 <a href="https://dropbox.github.io/dbx-career-framework/" title="dropbox engineer ladder">engineer ladder</a></p>
+<p>從 software engineer 到 quality assurance engineer，再到 reliability engineer，不同層級有著不同的標準。</p>
+<p>大公司有著明確制度，想要往上爬就需要滿足特定條件，一方面是學習，另一方面也是挑戰，能不能上去還是看個人。</p>
+<p>公司內部也有相對應文件，我想，先定好目標，比較知道缺失什麼需要補強。</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>David Recardo</title>
