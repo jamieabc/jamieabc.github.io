@@ -6,10 +6,21 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Jul 2021 23:14:09 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 27 Jul 2021 22:15:28 +0800</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>低調做人</title>
+      <link>/posts/people-low/</link>
+      <pubDate>Tue, 27 Jul 2021 22:15:28 +0800</pubDate>
+      
+      <guid>/posts/people-low/</guid>
+      <description>忘了從那邊下載到的電子書，書名是「低調做人 高調做事」，原本以為會講什麼大道理，想不到現在看了50頁，發覺書的內容就不斷在重複書名…只是透過不同的例子。
+但這些例子，也不曉得是真是假，其中一個講到關羽因為個性太過張揚，以致於最後戰死麥城。書中分析的很有道理，講的頭頭是道，不過我也沒仔細深就。
+也許，有些道理，實際上用看看才知道有沒有用。</description>
+    </item>
     
     <item>
       <title>Dropbox Engineer Ladder</title>
@@ -123,20 +134,6 @@ When first see this problem, I think it&amp;rsquo;s a knapsack problem: every nu
 Initially I have the idea to choosing closest middle cut in range, and it fails to guarantee always global optimal result.
 More specifically, the heuristic fails at this test case: n = 30, cuts = [5, 7, 13, 15, 18, 25, 26, 29]
 According to find closest middle cut, it will choose 15 as first cut since it&amp;rsquo;s the the half of 30, and best min cuts under 15 is 94, one of the possible outcome is [15, 7, 5, 13, 25, 26, 29, 18]</description>
-    </item>
-    
-    <item>
-      <title>Leetcode 1547 (1)</title>
-      <link>/posts/leetcode-1547-1/</link>
-      <pubDate>Mon, 10 Aug 2020 15:48:42 +0800</pubDate>
-      
-      <guid>/posts/leetcode-1547-1/</guid>
-      <description>This article is to write down some notes while solving this problem.
-Greedy I started with this example:
- n = 7, cuts = [1,3,4,5]
-   initial status:
- _ _ _ _ _ _ _ 0 7    first cut at 3:
- _ _ _ _ | _ _ _ _ _ 0 3 3 7  cost: 7 (because total length before cut is 7)</description>
     </item>
     
   </channel>
