@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Design Pattern - Command (1)">
+<meta itemprop="description" content="想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
+簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
+攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
+另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。">
+<meta itemprop="dateModified" content="2022-11-06T23:11:07+08:00" />
+<meta itemprop="wordCount" content="29">
+<meta itemprop="keywords" content="Design pattern,Programming," /><meta property="og:title" content="Design Pattern - Command (1)" />
+<meta property="og:description" content="想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
+簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
+攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
+另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/design-pattern-command-1/" /><meta property="article:section" content="posts" />
+
+<meta property="article:modified_time" content="2022-11-06T23:11:07+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Design Pattern - Command (1)"/>
+<meta name="twitter:description" content="想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
+簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
+攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
+另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Design Pattern - Command (1)</title>
+	<link rel="stylesheet" href="/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="/">Cognition Limits Imagination</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="/posts/">Posts</a>
+				<a href="/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/jamieabc" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="/posts/">Posts</a></li>
+			<li><a href="/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 6, 2022</span></div>
+				<h1>Design Pattern - Command (1)</h1>
+			</header>
+			<div class="content">
+				<p>想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：</p>
+<figure><img src="/ox-hugo/command-simple-order.svg"/>
+</figure>
+
+<p>簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。
+這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：</p>
+<figure><img src="/ox-hugo/command-complicte-order.svg"/>
+</figure>
+
+<p>顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：</p>
+<ul>
+<li>如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語</li>
+<li>服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆</li>
+<li>服務員可以在點餐/取餐時收取費用</li>
+</ul>
+<p>上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 <strong>interface</strong> ：</p>
+<figure><img src="/ox-hugo/design-complicate-order-interface.svg"/>
+</figure>
+
+<p>雖然每個物件依賴於 <strong>interface</strong> ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 <code>WaiterIntf</code> ， <code>CustomerIntf</code> ，與 <code>FoodStallerIntf</code> 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。</p>
+<p>有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…</p>
+<p>攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。</p>
+<p>另一個問題是，單純把 API 轉成 <strong>interface</strong> 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。</p>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>[Aaron]</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/design-pattern">Design pattern</a></span><span class="tag"><a href="/tags/programming">Programming</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>29 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-11-06 23:11</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="/posts/people-low/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>低調做人</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2022 <a href="/">Aaron Chang</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

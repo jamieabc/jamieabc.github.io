@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Images-in-contents on Cognition Limits Imagination</title>
+    <link>/images-in-content/</link>
+    <description>Recent content in Images-in-contents on Cognition Limits Imagination</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Nov 2022 21:58:37 +0800</lastBuildDate><atom:link href="/images-in-content/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design Pattern Command</title>
+      <link>/images-in-content/design-pattern-command/</link>
+      <pubDate>Sun, 06 Nov 2022 21:58:37 +0800</pubDate>
+      
+      <guid>/images-in-content/design-pattern-command/</guid>
+      <description>Design Pattern - Command 想像一個常見的場景：一位顧客走到小吃攤販前點了一份小吃。以 class diagram 表示會像是下面這個樣子：
+Imageine a common scenario:</description>
+    </item>
+    
+  </channel>
+</rss>

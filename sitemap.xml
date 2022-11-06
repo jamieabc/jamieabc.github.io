@@ -1,164 +1,118 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
+    <loc>/categories/2022/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/categories/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/tags/design-pattern/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/posts/design-pattern-command-1/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/tags/programming/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-11-06T23:11:07+08:00</lastmod>
+  </url><url>
+    <loc>/images-in-content/design-pattern-command/</loc>
+    <lastmod>2022-11-06T21:58:37+08:00</lastmod>
+  </url><url>
+    <loc>/tags/design__pattern/</loc>
+    <lastmod>2022-11-06T21:58:37+08:00</lastmod>
+  </url><url>
+    <loc>/images-in-content/</loc>
+    <lastmod>2022-11-06T21:58:37+08:00</lastmod>
+  </url><url>
     <loc>/categories/2021/</loc>
     <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/life/</loc>
     <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/reading/</loc>
     <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/people-low/</loc>
     <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/%E4%BD%8E%E8%AA%BF%E5%81%9A%E4%BA%BA%E9%AB%98%E8%AA%BF%E5%81%9A%E4%BA%8B/</loc>
     <lastmod>2021-07-27T22:15:28+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/dropbox/</loc>
     <lastmod>2021-07-16T23:14:09+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/dropbox-engineer-ladder/</loc>
     <lastmod>2021-07-16T23:14:09+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/programming/</loc>
-    <lastmod>2021-07-16T23:14:09+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/david-recardo/</loc>
     <lastmod>2021-07-06T22:15:48+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/%E6%A0%BC%E5%B1%80/</loc>
     <lastmod>2021-07-06T22:15:48+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/one-and-half-year/</loc>
     <lastmod>2021-06-29T19:53:14+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/bus-factor/</loc>
     <lastmod>2021-06-27T18:40:21+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/software-engineering-at-google/</loc>
     <lastmod>2021-06-27T18:40:21+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/algorithm/</loc>
     <lastmod>2021-06-20T14:12:16+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags/leetcode/</loc>
     <lastmod>2021-06-20T14:12:16+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/leetcode-795/</loc>
     <lastmod>2021-06-20T14:12:16+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/hyrum-law/</loc>
     <lastmod>2021-06-16T21:58:12+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/2020/</loc>
     <lastmod>2020-08-25T20:25:19+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/leetcode-1552-2/</loc>
     <lastmod>2020-08-25T20:25:19+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/leetcode-1552-1/</loc>
     <lastmod>2020-08-21T20:19:13+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/leetcode-1547-2/</loc>
     <lastmod>2020-08-15T12:43:05+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/leetcode-1547-1/</loc>
     <lastmod>2020-08-10T15:48:42+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/raise-coverate-rate-to-80/</loc>
     <lastmod>2020-03-08T17:25:34+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/2019/</loc>
     <lastmod>2019-12-13T20:20:35+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/leetcode/</loc>
     <lastmod>2019-12-13T20:20:35+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/correct-my-errors/</loc>
     <lastmod>2019-11-30T11:06:30+08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/posts/first-post/</loc>
-    <lastmod>2019-11-01T14:53:10+08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2019-11-01T14:53:10+00:00</lastmod>
+  </url><url>
     <loc>/about/</loc>
   </url>
-  
 </urlset>

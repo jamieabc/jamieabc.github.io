@@ -6,10 +6,32 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 27 Jul 2021 22:15:28 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 06 Nov 2022 23:11:07 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design Pattern - Command (1)</title>
+      <link>/posts/design-pattern-command-1/</link>
+      <pubDate>Sun, 06 Nov 2022 23:11:07 +0800</pubDate>
+      
+      <guid>/posts/design-pattern-command-1/</guid>
+      <description>想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
+簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
+攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
+另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。</description>
+    </item>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>Design Pattern Command</title>
+      <link>/images-in-content/design-pattern-command/</link>
+      <pubDate>Sun, 06 Nov 2022 21:58:37 +0800</pubDate>
+      
+      <guid>/images-in-content/design-pattern-command/</guid>
+      <description>Design Pattern - Command 想像一個常見的場景：一位顧客走到小吃攤販前點了一份小吃。以 class diagram 表示會像是下面這個樣子：
+Imageine a common scenario:</description>
+    </item>
     
     <item>
       <title>低調做人</title>
@@ -41,8 +63,8 @@
       
       <guid>/posts/david-recardo/</guid>
       <description>李嘉圖定律：
- 土地租金是土地使用者支付的價格，它是由壟斷性（稀缺性）決定，而不是由地主在上面做的投資和改良成本決定；它的價格受限於租用者（農民）能夠承擔的價格。
- 空氣因為供給無限，所以沒有任何價值；土地從某方面來說也是無限的（地球上還有很多地方的土地未經開發、居住），但不同地段租金有極大差異，為什麼同樣是自然資源，前者沒有任何價值，而後者有極大差異？
+土地租金是土地使用者支付的價格，它是由壟斷性（稀缺性）決定，而不是由地主在上面做的投資和改良成本決定；它的價格受限於租用者（農民）能夠承擔的價格。
+空氣因為供給無限，所以沒有任何價值；土地從某方面來說也是無限的（地球上還有很多地方的土地未經開發、居住），但不同地段租金有極大差異，為什麼同樣是自然資源，前者沒有任何價值，而後者有極大差異？
 李嘉圖給出了一個解釋，土地租金由兩個因素決定：收入差、和其他投資回報對比。
 第一個因素來自於自身產出，一片土地有充足水量，能產出的農作物會比貧瘠土地上所產出的農作物多，於是收入差別造成了租金差別。這個原因也同樣適用於人流多的地段、交通發達地段。
 第二個因素來自於跟其它投資相比，如果買股票的回報率大於炒房，那麼錢會往股票湧入，於是投入到房地產的資金減少，土地價格下降，造成土地的投資回報率上升。
@@ -71,7 +93,7 @@
       
       <guid>/posts/bus-factor/</guid>
       <description>The number of people that need to get hit by a bus before your project is completely doomed.
- 這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
+這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
 大部份人的天性是希望等到程式碼寫到完美後再發佈，但只有一個人知道的專案除了容易後繼無人外，缺乏討論、溝通的專案很可能在設計初期就埋藏了不可彌補的錯誤。
 常見的 Documentation，Pair pairgramming，Code review 都可以避免知識只存在少數人腦中的情況。</description>
     </item>
@@ -95,10 +117,11 @@ Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
       
       <guid>/posts/hyrum-law/</guid>
       <description>這章在講 scalability，裡面提到一個概念 Hyrum&amp;rsquo;s Law (Hyrum 是 Google 工程師):
- With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
- 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c++ 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。</description>
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
+依賴無處不在</description>
     </item>
     
     <item>
@@ -110,30 +133,7 @@ Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
       <description>This article tries to write down some notes while trying to solve problem 1552.
 After some days of thinking, I finally understand why this is a binary search problem.
 Thinking Didn&amp;rsquo;t think of binary search because I miss some details about this problem:
- To get maximum of minimum distance among selected numbers, smallest &amp;amp; largest numbers will definited being selected, because choosing them provides maximum range to distribute distance.    Once smallest &amp;amp; largest numbers are selected, theoretically maximum distance could be upper bounded to (largest - smallest) / (selected - 1)</description>
-    </item>
-    
-    <item>
-      <title>Leetcode 1552 (1)</title>
-      <link>/posts/leetcode-1552-1/</link>
-      <pubDate>Fri, 21 Aug 2020 20:19:13 +0800</pubDate>
-      
-      <guid>/posts/leetcode-1552-1/</guid>
-      <description>This article tries to write down some notes while trying to solve problem 1552.
-I think this problem can be restated as follows: given some positive integers with total size n, pick m numbers such that minimum distance among each selected is maximum.
-When first see this problem, I think it&amp;rsquo;s a knapsack problem: every number will be selected or not, find those possible combinations (pick m from n), calculate minimum distance, choose maximum from them.</description>
-    </item>
-    
-    <item>
-      <title>Leetcode 1547 (2)</title>
-      <link>/posts/leetcode-1547-2/</link>
-      <pubDate>Sat, 15 Aug 2020 12:43:05 +0800</pubDate>
-      
-      <guid>/posts/leetcode-1547-2/</guid>
-      <description>Thinking After brute force to find a solution and think about this proble, I have some other observations.
-Initially I have the idea to choosing closest middle cut in range, and it fails to guarantee always global optimal result.
-More specifically, the heuristic fails at this test case: n = 30, cuts = [5, 7, 13, 15, 18, 25, 26, 29]
-According to find closest middle cut, it will choose 15 as first cut since it&amp;rsquo;s the the half of 30, and best min cuts under 15 is 94, one of the possible outcome is [15, 7, 5, 13, 25, 26, 29, 18]</description>
+To get maximum of minimum distance among selected numbers, smallest &amp;amp; largest numbers will definited being selected, because choosing them provides maximum range to distribute distance. Once smallest &amp;amp; largest numbers are selected, theoretically maximum distance could be upper bounded to (largest - smallest) / (selected - 1)</description>
     </item>
     
   </channel>
