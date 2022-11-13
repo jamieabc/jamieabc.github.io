@@ -6,11 +6,11 @@
     <description>Recent content in Programming on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Nov 2022 13:32:40 +0800</lastBuildDate><atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Nov 2022 13:35:03 +0800</lastBuildDate><atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Design Pattern - Command (2)</title>
       <link>/posts/design-pattern-command-2/</link>
-      <pubDate>Sun, 13 Nov 2022 13:32:40 +0800</pubDate>
+      <pubDate>Sun, 13 Nov 2022 13:35:03 +0800</pubDate>
       
       <guid>/posts/design-pattern-command-2/</guid>
       <description>我目前理解設計模式（design pattern）存在目的是為了讓軟體分層，使得每個物件提供盡可能單一的功能。這樣設計的好處是只要物件提供單一功能，那麼該物件更易於維護，減少變更的機會。
@@ -23,7 +23,7 @@
 當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
 當服務員新增一種語言時，只要修改 Language 介面極可：
 如果以 c++ 實作的話會像是這樣：
-class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Cannot speak english&amp;#34; &amp;lt;&amp;lt; std::endl } virtual void Chiniese() { std::cout &amp;lt;&amp;lt; &amp;#34;不會講中文&amp;#34; &amp;lt;&amp;lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &amp;lt;&amp;lt; &amp;#34;來份飯&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &amp;lt;&amp;lt; &amp;#34;A Noodle&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class Order { public: void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() { std::cout &amp;lt;&amp;lt; &amp;#34;一碗白飯、蛋&amp;#34; &amp;lt;&amp;lt; egg_ &amp;lt;&amp;lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() { std::cout &amp;lt;&amp;lt; &amp;#34;一喔飯，湯 &amp;#34; &amp;lt;&amp;lt; soup_ &amp;lt;&amp;lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &amp;lt;&amp;lt; &amp;#34;歡迎光臨&amp;#34; &amp;lt;&amp;lt; std::end; } void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Welcome&amp;#34; &amp;lt;&amp;lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp;amp; order) { std::cout &amp;lt;&amp;lt; order.</description>
+class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Cannot speak english&amp;#34; &amp;lt;&amp;lt; std::endl } virtual void Chiniese() { std::cout &amp;lt;&amp;lt; &amp;#34;不會講中文&amp;#34; &amp;lt;&amp;lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &amp;lt;&amp;lt; &amp;#34;來份飯&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &amp;lt;&amp;lt; &amp;#34;A Noodle&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class Order { public: virtual void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一碗白飯、蛋&amp;#34; &amp;lt;&amp;lt; egg_ &amp;lt;&amp;lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一喔飯，湯 &amp;#34; &amp;lt;&amp;lt; soup_ &amp;lt;&amp;lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &amp;lt;&amp;lt; &amp;#34;歡迎光臨&amp;#34; &amp;lt;&amp;lt; std::end; } void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Welcome&amp;#34; &amp;lt;&amp;lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp;amp; order) { std::cout &amp;lt;&amp;lt; order.</description>
     </item>
     
     <item>

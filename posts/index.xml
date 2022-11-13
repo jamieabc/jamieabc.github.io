@@ -5,13 +5,13 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Sun, 13 Nov 2022 13:32:40 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 13 Nov 2022 13:35:03 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>Design Pattern - Command (2)</title>
 			<link>/posts/design-pattern-command-2/</link>
-			<pubDate>Sun, 13 Nov 2022 13:32:40 +0800</pubDate>
+			<pubDate>Sun, 13 Nov 2022 13:35:03 +0800</pubDate>
 			
 			<guid>/posts/design-pattern-command-2/</guid>
 			<description>我目前理解設計模式（design pattern）存在目的是為了讓軟體分層，使得每個物件提供盡可能單一的功能。這樣設計的好處是只要物件提供單一功能，那麼該物件更易於維護，減少變更的機會。
@@ -24,7 +24,7 @@
 當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
 當服務員新增一種語言時，只要修改 Language 介面極可：
 如果以 c++ 實作的話會像是這樣：
-class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Cannot speak english&amp;#34; &amp;lt;&amp;lt; std::endl } virtual void Chiniese() { std::cout &amp;lt;&amp;lt; &amp;#34;不會講中文&amp;#34; &amp;lt;&amp;lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &amp;lt;&amp;lt; &amp;#34;來份飯&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &amp;lt;&amp;lt; &amp;#34;A Noodle&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class Order { public: void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() { std::cout &amp;lt;&amp;lt; &amp;#34;一碗白飯、蛋&amp;#34; &amp;lt;&amp;lt; egg_ &amp;lt;&amp;lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() { std::cout &amp;lt;&amp;lt; &amp;#34;一喔飯，湯 &amp;#34; &amp;lt;&amp;lt; soup_ &amp;lt;&amp;lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &amp;lt;&amp;lt; &amp;#34;歡迎光臨&amp;#34; &amp;lt;&amp;lt; std::end; } void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Welcome&amp;#34; &amp;lt;&amp;lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp;amp; order) { std::cout &amp;lt;&amp;lt; order.</description>
+class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Cannot speak english&amp;#34; &amp;lt;&amp;lt; std::endl } virtual void Chiniese() { std::cout &amp;lt;&amp;lt; &amp;#34;不會講中文&amp;#34; &amp;lt;&amp;lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &amp;lt;&amp;lt; &amp;#34;來份飯&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &amp;lt;&amp;lt; &amp;#34;A Noodle&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class Order { public: virtual void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一碗白飯、蛋&amp;#34; &amp;lt;&amp;lt; egg_ &amp;lt;&amp;lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一喔飯，湯 &amp;#34; &amp;lt;&amp;lt; soup_ &amp;lt;&amp;lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &amp;lt;&amp;lt; &amp;#34;歡迎光臨&amp;#34; &amp;lt;&amp;lt; std::end; } void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Welcome&amp;#34; &amp;lt;&amp;lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp;amp; order) { std::cout &amp;lt;&amp;lt; order.</description>
 			<content type="html"><![CDATA[<p>我目前理解設計模式（design pattern）存在目的是為了讓軟體分層，使得每個物件提供盡可能單一的功能。這樣設計的好處是只要物件提供單一功能，那麼該物件更易於維護，減少變更的機會。</p>
 <p>一般來說採用設計模式能讓軟體設計更有彈性、易於維護，但我覺得不是所有程式碼都需要考慮到設計模式，如果一段程式碼寫好之後便再也不需要變動（不會再有新的需求，不需要再維護），那麼用什麼樣的方式實現其實影嚮不大。</p>
 <p>更深一層思考，需求變動通常意味著程式碼變動，如果只是一味的透過增加 function 參數、用 if 去判斷情境，程式碼的複雜度會不斷提高，演化到極致所有程式碼會有「牽一髮而動全身」的特性，讓人難以修改也難以維護。所以某種程度來說，設計模式存在的原因是為了讓程式複雜度處在人能接受的範圍。換句話說，如果有一天電腦能設計出軟體，那麼設計模式對於電腦來說是不必要的，因為電腦有盡乎無窮的算力因此處理複雜度的能力遠高於人類。</p>
@@ -65,13 +65,13 @@ class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &am
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Order</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">Details</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Details</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FoodOrder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Order</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">  <span class="n">FoodOrder</span><span class="p">(</span><span class="kt">bool</span> <span class="n">egg</span><span class="p">)</span> <span class="o">:</span> <span class="n">egg_</span><span class="p">(</span><span class="n">egg</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一碗白飯、蛋&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">egg_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一碗白飯、蛋&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">egg_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"> <span class="k">private</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">egg_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
@@ -80,7 +80,7 @@ class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &am
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NoodleOrder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Order</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">  <span class="n">NoodleOrder</span><span class="p">(</span><span class="kt">bool</span> <span class="n">soup</span><span class="p">)</span> <span class="o">:</span> <span class="n">soup_</span><span class="p">(</span><span class="n">soup</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一喔飯，湯 &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">soup_</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一喔飯，湯 &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">soup_</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"> <span class="k">private</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">  <span class="n">boo</span> <span class="n">soup_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
