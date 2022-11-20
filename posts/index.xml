@@ -5,8 +5,141 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Sun, 13 Nov 2022 13:38:29 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 20 Nov 2022 17:55:14 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Design Pattern - State (1)</title>
+			<link>/posts/design-pattern-state-1/</link>
+			<pubDate>Sun, 20 Nov 2022 17:55:14 +0800</pubDate>
+			
+			<guid>/posts/design-pattern-state-1/</guid>
+			<description>假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：
+早上9~12點播放&amp;quot;早安&amp;quot; 中午12~1點播放&amp;quot;午餐時間&amp;quot; 下午1~6點播放&amp;quot;下午安&amp;quot; 晚上6~隔天早上9點播放&amp;quot;下班&amp;quot; 最簡單的實現方式會是怎麼樣呢？
+class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &amp;gt;= 9 &amp;amp;&amp;amp; hour_ &amp;lt; 12) { cout &amp;lt;&amp;lt; &amp;#34;Good morning&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 12 &amp;amp;&amp;amp; hour_ &amp;lt; 13) { cout &amp;lt;&amp;lt; &amp;#34;Lunch time&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 13 &amp;amp;&amp;amp; hour_ &amp;lt; 18) { cout &amp;lt;&amp;lt; &amp;#34;Good afternoon&amp;#34; &amp;lt;&amp;lt; endl; } else { cout &amp;lt;&amp;lt; &amp;#34;Outside of working hour&amp;#34; &amp;lt;&amp;lt; endl; } } void TerminateCall() {} void SetHour(size_t hour) { hour_ = hour; } private: size_t hour_ = 0; }; 一切看起來都很正常，程式碼不長、每個函式執行目標明確。</description>
+			<content type="html"><![CDATA[<p>假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：</p>
+<ul>
+<li>早上9~12點播放&quot;早安&quot;</li>
+<li>中午12~1點播放&quot;午餐時間&quot;</li>
+<li>下午1~6點播放&quot;下午安&quot;</li>
+<li>晚上6~隔天早上9點播放&quot;下班&quot;</li>
+</ul>
+<p>最簡單的實現方式會是怎麼樣呢？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AnswerMachine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">ReceiveCall</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">Answer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">hour_</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="o">&amp;&amp;</span> <span class="n">hour_</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Good morning&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">hour_</span> <span class="o">&gt;=</span> <span class="mi">12</span> <span class="o">&amp;&amp;</span> <span class="n">hour_</span> <span class="o">&lt;</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Lunch time&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">hour_</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="o">&amp;&amp;</span> <span class="n">hour_</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Good afternoon&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Outside of working hour&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">TerminateCall</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">SetHour</span><span class="p">(</span><span class="n">size_t</span> <span class="n">hour</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">hour_</span> <span class="o">=</span> <span class="n">hour</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">size_t</span> <span class="n">hour_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>一切看起來都很正常，程式碼不長、每個函式執行目標明確。</p>
+<p>如果某天因為工作需要，在早上9~10點間的答錄需要客戶在1、2、3、4中做出選擇，並且根據不同的選擇而有相對應的提示語音，那麼 Answer 這個函式會愈來愈複雜。</p>
+<p>想像 Answer 裡有十幾個判斷式，每個判斷式各自執行不同邏輯，於是乎 Answer 會愈來愈難以維護。</p>
+<p>答錄機該負責接電話、知道使用者按了什麼鍵、播放語音。目前是不是上班時間好像跟答錄機本身提供的功能不相關。更進一步說，如果有別的程式能提供錄音檔給答錄機，那麼答錄機只要照著播就好，目前幾點、是不是週末、是不是補班日，好像都跟答錄機無關。</p>
+<p>Design pattern 目的是把不同物件間的耦合分拆，藉此讓軟體更易於維護、理解、修改。那怎麼樣能上面的程式碼減少耦合呢？如果把時間相關的邏輯抽離讓別的物件負責，是不是能減少耦合呢？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">WorkingState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MorningState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">12</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">SetState</span><span class="p">(</span><span class="k">new</span> <span class="n">NoonState</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">Answer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Good morning&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NoonWorkingState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">SetState</span><span class="p">(</span><span class="k">new</span> <span class="n">AfternoonState</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">Answer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Lunch time&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AfternoonState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">SetState</span><span class="p">(</span><span class="k">new</span> <span class="n">OffWorkState</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">Answer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Good afternoon&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">OffWorkState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">SetState</span><span class="p">(</span><span class="k">new</span> <span class="n">MorningState</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="n">answer_machine</span><span class="p">.</span><span class="n">Answer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Outside of working hour&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AnswerMachine</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">explicit</span> <span class="n">AnswerMachine</span><span class="p">(</span><span class="n">WorkingState</span><span class="o">*</span> <span class="n">working_state</span><span class="p">)</span> <span class="o">:</span> <span class="n">working_state_</span><span class="p">(</span><span class="n">working_state</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">ReceiveCall</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">SetState</span><span class="p">(</span><span class="n">WorkingState</span><span class="o">*</span> <span class="n">working_state</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">working_state_</span> <span class="o">=</span> <span class="n">working_state</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">Answer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">working_state_</span><span class="o">-&gt;</span><span class="n">Process</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">TerminateCall</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">SetHour</span><span class="p">(</span><span class="n">size_t</span> <span class="n">hour</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">hour_</span> <span class="o">=</span> <span class="n">hour</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">size_t</span> <span class="nf">Hour</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">hour_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">size_t</span> <span class="n">hour_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">WorkingState</span><span class="o">*</span> <span class="n">working_state_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>在這樣的情況下，有關時間的邏輯透過 WorkingState 處理，在 AnswerMachine::Answer 裡便不需要處理因為不同時間而帶來的邏輯。這種處理方法便是 state design pattern。</p>
+<p>當物件會處在不同狀態，不同狀態下影嚮其行為時便適合使用 state design pattern。</p>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Design Pattern - Command (2)</title>

@@ -6,7 +6,18 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Nov 2022 13:38:29 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Nov 2022 17:55:14 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design Pattern - State (1)</title>
+      <link>/posts/design-pattern-state-1/</link>
+      <pubDate>Sun, 20 Nov 2022 17:55:14 +0800</pubDate>
+      
+      <guid>/posts/design-pattern-state-1/</guid>
+      <description>假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：
+早上9~12點播放&amp;quot;早安&amp;quot; 中午12~1點播放&amp;quot;午餐時間&amp;quot; 下午1~6點播放&amp;quot;下午安&amp;quot; 晚上6~隔天早上9點播放&amp;quot;下班&amp;quot; 最簡單的實現方式會是怎麼樣呢？
+class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &amp;gt;= 9 &amp;amp;&amp;amp; hour_ &amp;lt; 12) { cout &amp;lt;&amp;lt; &amp;#34;Good morning&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 12 &amp;amp;&amp;amp; hour_ &amp;lt; 13) { cout &amp;lt;&amp;lt; &amp;#34;Lunch time&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 13 &amp;amp;&amp;amp; hour_ &amp;lt; 18) { cout &amp;lt;&amp;lt; &amp;#34;Good afternoon&amp;#34; &amp;lt;&amp;lt; endl; } else { cout &amp;lt;&amp;lt; &amp;#34;Outside of working hour&amp;#34; &amp;lt;&amp;lt; endl; } } void TerminateCall() {} void SetHour(size_t hour) { hour_ = hour; } private: size_t hour_ = 0; }; 一切看起來都很正常，程式碼不長、每個函式執行目標明確。</description>
+    </item>
+    
     <item>
       <title>Design Pattern - Command (2)</title>
       <link>/posts/design-pattern-command-2/</link>
@@ -127,20 +138,6 @@ Imageine a common scenario:</description>
 Although I know this problem can be solved in linear time, it still takes me a while to fiture out the optimal solution.
 Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
 [1, 2, 1, 3, 1, 4] ^ start from here, 1 &amp;lt; 2 not in range, total 4 sub-arrays meet criteria: [1, 2], [1, 2, 1], [1, 2, 1, 3], [1, 2, 1, 3, 1] ^ start from here, 2 &amp;gt;= 2 &amp;amp;&amp;amp; 2 &amp;lt;= 3 in range, total 4 sub-arrays meet criteria: [2], [2, 1], [2, 1, 3], [2, 1, 3, 1] ^ start from here, 1 &amp;lt; 2, not in range, total 2 sub-arrays meet criteria: [1, 3], [1, 3, 1] ^ start from here, 3 &amp;gt;= 2 &amp;amp;&amp;amp; 3 &amp;lt;= 3 in range, total 2 sub-arrays meet criteria: [3], [3, 1] ^ start from here, 1 &amp;lt; 2 not in range, total 0 sub-arrays meet criteria It&amp;rsquo;s obvious to check valid sub-arrays start from specific index, this way guarantees no duplicate count exists.</description>
-    </item>
-    
-    <item>
-      <title>Hyrum&#39;s Law</title>
-      <link>/posts/hyrum-law/</link>
-      <pubDate>Wed, 16 Jun 2021 21:58:12 +0800</pubDate>
-      
-      <guid>/posts/hyrum-law/</guid>
-      <description>這章在講 scalability，裡面提到一個概念 Hyrum&amp;rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
-我在這部影片中聽到原作者的另一個例子：在某個 c++ 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在</description>
     </item>
     
   </channel>
