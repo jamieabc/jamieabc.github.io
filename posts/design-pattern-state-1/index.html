@@ -9,8 +9,8 @@
 <meta itemprop="description" content="假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：
 早上9~12點播放&quot;早安&quot; 中午12~1點播放&quot;午餐時間&quot; 下午1~6點播放&quot;下午安&quot; 晚上6~隔天早上9點播放&quot;下班&quot; 最簡單的實現方式會是怎麼樣呢？
 class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &gt;= 9 &amp;&amp; hour_ &lt; 12) { cout &lt;&lt; &#34;Good morning&#34; &lt;&lt; endl; } else if (hour_ &gt;= 12 &amp;&amp; hour_ &lt; 13) { cout &lt;&lt; &#34;Lunch time&#34; &lt;&lt; endl; } else if (hour_ &gt;= 13 &amp;&amp; hour_ &lt; 18) { cout &lt;&lt; &#34;Good afternoon&#34; &lt;&lt; endl; } else { cout &lt;&lt; &#34;Outside of working hour&#34; &lt;&lt; endl; } } void TerminateCall() {} void SetHour(size_t hour) { hour_ = hour; } private: size_t hour_ = 0; }; 一切看起來都很正常，程式碼不長、每個函式執行目標明確。">
-<meta itemprop="dateModified" content="2022-11-20T17:55:14+08:00" />
-<meta itemprop="wordCount" content="309">
+<meta itemprop="dateModified" content="2022-11-20T20:37:53+08:00" />
+<meta itemprop="wordCount" content="321">
 <meta itemprop="keywords" content="Design pattern,Programming," /><meta property="og:title" content="Design Pattern - State (1)" />
 <meta property="og:description" content="假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：
 早上9~12點播放&quot;早安&quot; 中午12~1點播放&quot;午餐時間&quot; 下午1~6點播放&quot;下午安&quot; 晚上6~隔天早上9點播放&quot;下班&quot; 最簡單的實現方式會是怎麼樣呢？
@@ -18,7 +18,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &g
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/design-pattern-state-1/" /><meta property="article:section" content="posts" />
 
-<meta property="article:modified_time" content="2022-11-20T17:55:14+08:00" />
+<meta property="article:modified_time" content="2022-11-20T20:37:53+08:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Design Pattern - State (1)"/>
@@ -116,7 +116,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &g
 </span></span><span class="line"><span class="cl">        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MorningState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MorningState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">12</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="p">{</span>
@@ -128,7 +128,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &g
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NoonWorkingState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NoonWorkingState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
@@ -140,7 +140,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &g
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AfternoonState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AfternoonState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
@@ -152,7 +152,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &g
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">OffWorkState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">OffWorkState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
@@ -202,8 +202,8 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &g
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/design-pattern">Design pattern</a></span><span class="tag"><a href="/tags/programming">Programming</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>309 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-11-20 17:55</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>321 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-11-20 20:37</p>
 			</footer>
 		</article>
 		<div class="post-nav thin">

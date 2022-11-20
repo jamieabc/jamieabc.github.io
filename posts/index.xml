@@ -5,13 +5,13 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Sun, 20 Nov 2022 17:55:14 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 20 Nov 2022 20:37:53 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>Design Pattern - State (1)</title>
 			<link>/posts/design-pattern-state-1/</link>
-			<pubDate>Sun, 20 Nov 2022 17:55:14 +0800</pubDate>
+			<pubDate>Sun, 20 Nov 2022 20:37:53 +0800</pubDate>
 			
 			<guid>/posts/design-pattern-state-1/</guid>
 			<description>假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：
@@ -60,7 +60,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &a
 </span></span><span class="line"><span class="cl">        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MorningState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MorningState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">12</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">)</span> <span class="p">{</span>
@@ -72,7 +72,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &a
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NoonWorkingState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NoonWorkingState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
@@ -84,7 +84,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &a
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AfternoonState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AfternoonState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">13</span><span class="p">)</span> <span class="p">{</span>
@@ -96,7 +96,7 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &a
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">OffWorkState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">OffWorkState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkingState</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Process</span><span class="p">(</span><span class="n">AnswerMachine</span><span class="o">&amp;</span> <span class="n">answer_machine</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="o">||</span> <span class="n">answer_machine</span><span class="p">.</span><span class="n">Hour</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">)</span> <span class="p">{</span>
