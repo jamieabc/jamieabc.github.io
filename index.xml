@@ -6,7 +6,18 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Nov 2022 20:37:53 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Dec 2022 12:49:37 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>There are no zero-cost abstractions</title>
+      <link>/posts/there-are-no-zero-cost-abstractios/</link>
+      <pubDate>Sun, 04 Dec 2022 12:49:37 +0800</pubDate>
+      
+      <guid>/posts/there-are-no-zero-cost-abstractios/</guid>
+      <description>CppCon 2019: Chandler Carruth “There Are No Zero-cost Abstractions”
+Key takeaways:
+Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞處時才值得 Run time v.s. build time （protocol buffer） Trivia class (unique pointer v.s. raw pointer) Human costs (a huge function v.s. multiple separated smaller functions, parameters) </description>
+    </item>
+    
     <item>
       <title>Design Pattern - State (1)</title>
       <link>/posts/design-pattern-state-1/</link>
@@ -126,18 +137,6 @@ Imageine a common scenario:</description>
 這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
 大部份人的天性是希望等到程式碼寫到完美後再發佈，但只有一個人知道的專案除了容易後繼無人外，缺乏討論、溝通的專案很可能在設計初期就埋藏了不可彌補的錯誤。
 常見的 Documentation，Pair pairgramming，Code review 都可以避免知識只存在少數人腦中的情況。</description>
-    </item>
-    
-    <item>
-      <title>Leetcode 795</title>
-      <link>/posts/leetcode-795/</link>
-      <pubDate>Sun, 20 Jun 2021 14:12:16 +0800</pubDate>
-      
-      <guid>/posts/leetcode-795/</guid>
-      <description>Program description at here
-Although I know this problem can be solved in linear time, it still takes me a while to fiture out the optimal solution.
-Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
-[1, 2, 1, 3, 1, 4] ^ start from here, 1 &amp;lt; 2 not in range, total 4 sub-arrays meet criteria: [1, 2], [1, 2, 1], [1, 2, 1, 3], [1, 2, 1, 3, 1] ^ start from here, 2 &amp;gt;= 2 &amp;amp;&amp;amp; 2 &amp;lt;= 3 in range, total 4 sub-arrays meet criteria: [2], [2, 1], [2, 1, 3], [2, 1, 3, 1] ^ start from here, 1 &amp;lt; 2, not in range, total 2 sub-arrays meet criteria: [1, 3], [1, 3, 1] ^ start from here, 3 &amp;gt;= 2 &amp;amp;&amp;amp; 3 &amp;lt;= 3 in range, total 2 sub-arrays meet criteria: [3], [3, 1] ^ start from here, 1 &amp;lt; 2 not in range, total 0 sub-arrays meet criteria It&amp;rsquo;s obvious to check valid sub-arrays start from specific index, this way guarantees no duplicate count exists.</description>
     </item>
     
   </channel>

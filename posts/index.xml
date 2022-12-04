@@ -5,8 +5,28 @@
 		<description>Recent content in Posts on Cognition Limits Imagination</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Sun, 20 Nov 2022 20:37:53 +0800</lastBuildDate>
+		<lastBuildDate>Sun, 04 Dec 2022 12:49:37 +0800</lastBuildDate>
 		<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>There are no zero-cost abstractions</title>
+			<link>/posts/there-are-no-zero-cost-abstractios/</link>
+			<pubDate>Sun, 04 Dec 2022 12:49:37 +0800</pubDate>
+			
+			<guid>/posts/there-are-no-zero-cost-abstractios/</guid>
+			<description>CppCon 2019: Chandler Carruth “There Are No Zero-cost Abstractions”
+Key takeaways:
+Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞處時才值得 Run time v.s. build time （protocol buffer） Trivia class (unique pointer v.s. raw pointer) Human costs (a huge function v.s. multiple separated smaller functions, parameters) </description>
+			<content type="html"><![CDATA[<p><a href="https://www.youtube.com/watch?v=rHIkrotSwcc">CppCon 2019: Chandler Carruth “There Are No Zero-cost Abstractions”</a></p>
+<p>Key takeaways:</p>
+<ul>
+<li>Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞處時才值得</li>
+<li>Run time v.s. build time （protocol buffer）</li>
+<li>Trivia class (unique pointer v.s. raw pointer)</li>
+<li>Human costs (a huge function v.s. multiple separated smaller functions, parameters)</li>
+</ul>
+]]></content>
+		</item>
 		
 		<item>
 			<title>Design Pattern - State (1)</title>
