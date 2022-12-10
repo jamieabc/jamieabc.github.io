@@ -6,7 +6,19 @@
     <description>Recent content in 2022 on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 12:49:37 +0800</lastBuildDate><atom:link href="/categories/2022/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Dec 2022 22:30:04 +0800</lastBuildDate><atom:link href="/categories/2022/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design Pattern - Mememto (1)</title>
+      <link>/posts/design-pattern-mememto-1/</link>
+      <pubDate>Sat, 10 Dec 2022 22:30:04 +0800</pubDate>
+      
+      <guid>/posts/design-pattern-mememto-1/</guid>
+      <description>Situation 常用的軟體包括文字編輯器、網頁瀏覽器、影像編輯器通常會提供回復上一步 (Undo) 的功能，雖然不同軟體 Undo 的作用不同，但大體來說都是回到這一個動作前的狀態。
+要實現 Undo 不難，最直觀作法是把目前物件狀態存下來，需要 Undo 的時候就把存下來的變數回復，以影像編輯器為例：
+class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { state_ = image_histories_.back(); histories_.pop_back(); } private: struct State { vector&amp;lt;int32_t&amp;gt; image; int32_t width_ = 0; int32_t height_ = 0; }; vector&amp;lt;State&amp;gt; histories_; State state_; }; Difficulty 這是一個簡單的方法，但影像編輯器為什麼會跟儲存狀態跟回復狀態有關？影像編輯器不是應該只跟影像編輯相關嗎？這個違背了 singla responsibility 的設計原則，因為 PhotoEditor 被修改的原因除了提供影影編輯相關的功能外，還可能因為儲存狀態跟回復狀態功能而修改。舉例來說，如果狀態存在記憶體裡，但因為種種原因而發覺記憶體空間不足以至於要把狀態儲存到硬碟上，這時候就會需要更改 PhotoEditor ，而把狀態存在記憶體或是硬碟跟 PhotoEditor 似乎是不相關的。
+為了把物件職則分開需要有額外一個物件 History 專門處理儲存跟回復的功能，為了讓 History 能儲存與回復 PhotoEditor 內部狀態， PhotoEditor 需要把內部狀態改成 public 才能讓 History 存取。這又違背了 encaspulation 的設計原則，像是下面的例子：</description>
+    </item>
+    
     <item>
       <title>There are no zero-cost abstractions</title>
       <link>/posts/there-are-no-zero-cost-abstractios/</link>

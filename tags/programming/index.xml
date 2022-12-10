@@ -6,7 +6,19 @@
     <description>Recent content in Programming on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 12:49:37 +0800</lastBuildDate><atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Dec 2022 22:30:04 +0800</lastBuildDate><atom:link href="/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design Pattern - Mememto (1)</title>
+      <link>/posts/design-pattern-mememto-1/</link>
+      <pubDate>Sat, 10 Dec 2022 22:30:04 +0800</pubDate>
+      
+      <guid>/posts/design-pattern-mememto-1/</guid>
+      <description>Situation 常用的軟體包括文字編輯器、網頁瀏覽器、影像編輯器通常會提供回復上一步 (Undo) 的功能，雖然不同軟體 Undo 的作用不同，但大體來說都是回到這一個動作前的狀態。
+要實現 Undo 不難，最直觀作法是把目前物件狀態存下來，需要 Undo 的時候就把存下來的變數回復，以影像編輯器為例：
+class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { state_ = image_histories_.back(); histories_.pop_back(); } private: struct State { vector&amp;lt;int32_t&amp;gt; image; int32_t width_ = 0; int32_t height_ = 0; }; vector&amp;lt;State&amp;gt; histories_; State state_; }; Difficulty 這是一個簡單的方法，但影像編輯器為什麼會跟儲存狀態跟回復狀態有關？影像編輯器不是應該只跟影像編輯相關嗎？這個違背了 singla responsibility 的設計原則，因為 PhotoEditor 被修改的原因除了提供影影編輯相關的功能外，還可能因為儲存狀態跟回復狀態功能而修改。舉例來說，如果狀態存在記憶體裡，但因為種種原因而發覺記憶體空間不足以至於要把狀態儲存到硬碟上，這時候就會需要更改 PhotoEditor ，而把狀態存在記憶體或是硬碟跟 PhotoEditor 似乎是不相關的。
+為了把物件職則分開需要有額外一個物件 History 專門處理儲存跟回復的功能，為了讓 History 能儲存與回復 PhotoEditor 內部狀態， PhotoEditor 需要把內部狀態改成 public 才能讓 History 存取。這又違背了 encaspulation 的設計原則，像是下面的例子：</description>
+    </item>
+    
     <item>
       <title>There are no zero-cost abstractions</title>
       <link>/posts/there-are-no-zero-cost-abstractios/</link>
@@ -121,20 +133,6 @@ Imageine a common scenario:</description>
 Although I know this problem can be solved in linear time, it still takes me a while to fiture out the optimal solution.
 Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
 [1, 2, 1, 3, 1, 4] ^ start from here, 1 &amp;lt; 2 not in range, total 4 sub-arrays meet criteria: [1, 2], [1, 2, 1], [1, 2, 1, 3], [1, 2, 1, 3, 1] ^ start from here, 2 &amp;gt;= 2 &amp;amp;&amp;amp; 2 &amp;lt;= 3 in range, total 4 sub-arrays meet criteria: [2], [2, 1], [2, 1, 3], [2, 1, 3, 1] ^ start from here, 1 &amp;lt; 2, not in range, total 2 sub-arrays meet criteria: [1, 3], [1, 3, 1] ^ start from here, 3 &amp;gt;= 2 &amp;amp;&amp;amp; 3 &amp;lt;= 3 in range, total 2 sub-arrays meet criteria: [3], [3, 1] ^ start from here, 1 &amp;lt; 2 not in range, total 0 sub-arrays meet criteria It&amp;rsquo;s obvious to check valid sub-arrays start from specific index, this way guarantees no duplicate count exists.</description>
-    </item>
-    
-    <item>
-      <title>Hyrum&#39;s Law</title>
-      <link>/posts/hyrum-law/</link>
-      <pubDate>Wed, 16 Jun 2021 21:58:12 +0800</pubDate>
-      
-      <guid>/posts/hyrum-law/</guid>
-      <description>這章在講 scalability，裡面提到一個概念 Hyrum&amp;rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
-我在這部影片中聽到原作者的另一個例子：在某個 c++ 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在</description>
     </item>
     
   </channel>
