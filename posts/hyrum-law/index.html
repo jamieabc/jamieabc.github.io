@@ -7,32 +7,30 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta itemprop="name" content="Hyrum&#39;s Law">
 <meta itemprop="description" content="這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c&#43;&#43; 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在"><meta itemprop="datePublished" content="2021-06-16T21:58:12+08:00" />
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。"><meta itemprop="datePublished" content="2021-06-16T21:58:12+08:00" />
 <meta itemprop="dateModified" content="2021-06-16T21:58:12+08:00" />
 <meta itemprop="wordCount" content="69">
 <meta itemprop="keywords" content="Programming,Software Engineering at Google,Reading," /><meta property="og:title" content="Hyrum&#39;s Law" />
 <meta property="og:description" content="這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c&#43;&#43; 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在" />
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/hyrum-law/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-06-16T21:58:12+08:00" />
 <meta property="article:modified_time" content="2021-06-16T21:58:12+08:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hyrum&#39;s Law"/>
 <meta name="twitter:description" content="這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c&#43;&#43; 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在"/>
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。"/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -42,13 +40,13 @@ With a sufficient number of users of an API, it does not matter what you promise
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>Hyrum&#39;s Law</title>
-	<link rel="stylesheet" href="/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.min.ff166efd50adc08a80c086f15517b03a4a4cf4e24f788f72b74a51296520757a.css" integrity="sha256-/xZu/VCtwIqAwIbxVRewOkpM9OJPeI9yt0pRKWUgdXo=" crossorigin="anonymous">
 	
 </head>
 
 <body id="page">
 	
-	<header id="site-header" class="animated slideInUp faster">
+	<header id="site-header" class="animated slideInUp">
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
@@ -80,6 +78,18 @@ With a sufficient number of users of an API, it does not matter what you promise
 				<div class="post-meta"><span>Jun 16, 2021</span></div>
 				<h1>Hyrum&#39;s Law</h1>
 			</header>
+			<div class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/programming">Programming</a></span><span class="tag"><a href="/tags/software-engineering-at-google">Software Engineering at Google</a></span><span class="tag"><a href="/tags/reading">Reading</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>69 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-06-16 21:58
+					
+						
+					
+				</p>
+			</div>
+			<hr class="post-end">
 			<div class="content">
 				<p>這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):</p>
 <blockquote>
@@ -94,14 +104,7 @@ will be depended on by somebody.</p>
 <p>依賴無處不在</p>
 
 			</div>
-			<hr class="post-end">
-			<footer class="post-info">
-				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/programming">Programming</a></span><span class="tag"><a href="/tags/software-engineering-at-google">Software Engineering at Google</a></span><span class="tag"><a href="/tags/reading">Reading</a></span>
-				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>69 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2021-06-16 21:58</p>
-			</footer>
+			<hr class="art-end">
 		</article>
 		<div class="post-nav thin">
 			<a class="next-post" href="/posts/leetcode-795/">
@@ -115,16 +118,22 @@ will be depended on by somebody.</p>
 </div>
 	</main>
 
-	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
-		<p>&copy; 2022 <a href="/">Aaron Chang</a></p>
-		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
-		</p>
-	</footer>
+<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+	<p>
+		&copy; 2023 <a href="/">Aaron Chang</a>
+		&#183; 
+		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
+		
+		&#183; <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		
+	</p>
 
+</footer>
 
-
-	<script src="/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+	<script async src="/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
 	
 
 </body>

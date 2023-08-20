@@ -21,6 +21,7 @@ class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { 
 <meta property="og:url" content="/posts/design-pattern-mememto-1/" /><meta property="article:section" content="posts" />
 
 <meta property="article:modified_time" content="2022-12-10T22:30:04+08:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Design Pattern - Mememto (1)"/>
 <meta name="twitter:description" content="Situation 常用的軟體包括文字編輯器、網頁瀏覽器、影像編輯器通常會提供回復上一步 (Undo) 的功能，雖然不同軟體 Undo 的作用不同，但大體來說都是回到這一個動作前的狀態。
@@ -36,13 +37,13 @@ class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { 
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>Design Pattern - Mememto (1)</title>
-	<link rel="stylesheet" href="/css/style.min.657bcb7af31123e4156b1a3d2ff60a636717e54ead74f882136b5114cf72b55e.css" integrity="sha256-ZXvLevMRI+QVaxo9L/YKY2cX5U6tdPiCE2tRFM9ytV4=" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.min.ff166efd50adc08a80c086f15517b03a4a4cf4e24f788f72b74a51296520757a.css" integrity="sha256-/xZu/VCtwIqAwIbxVRewOkpM9OJPeI9yt0pRKWUgdXo=" crossorigin="anonymous">
 	
 </head>
 
 <body id="page">
 	
-	<header id="site-header" class="animated slideInUp faster">
+	<header id="site-header" class="animated slideInUp">
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
@@ -74,143 +75,151 @@ class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { 
 				<div class="post-meta"><span>Dec 10, 2022</span></div>
 				<h1>Design Pattern - Mememto (1)</h1>
 			</header>
-			<div class="content">
-				<h2 id="situation">Situation<a href="#situation" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>常用的軟體包括文字編輯器、網頁瀏覽器、影像編輯器通常會提供回復上一步 (Undo) 的功能，雖然不同軟體 Undo 的作用不同，但大體來說都是回到這一個動作前的狀態。</p>
-<p>要實現 Undo 不難，最直觀作法是把目前物件狀態存下來，需要 Undo 的時候就把存下來的變數回復，以影像編輯器為例：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PhotoEditor</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Backup</span><span class="p">()</span> <span class="p">{</span> <span class="n">histories_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">state_</span><span class="p">);</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Undo</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">state_</span> <span class="o">=</span> <span class="n">image_histories_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">histories_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">struct</span> <span class="nc">State</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">image</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int32_t</span> <span class="n">width_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int32_t</span> <span class="n">height_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">histories_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><h2 id="difficulty">Difficulty<a href="#difficulty" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>這是一個簡單的方法，但影像編輯器為什麼會跟儲存狀態跟回復狀態有關？影像編輯器不是應該只跟影像編輯相關嗎？這個違背了 singla responsibility 的設計原則，因為 <code>PhotoEditor</code> 被修改的原因除了提供影影編輯相關的功能外，還可能因為儲存狀態跟回復狀態功能而修改。舉例來說，如果狀態存在記憶體裡，但因為種種原因而發覺記憶體空間不足以至於要把狀態儲存到硬碟上，這時候就會需要更改 <code>PhotoEditor</code> ，而把狀態存在記憶體或是硬碟跟 <code>PhotoEditor</code> 似乎是不相關的。</p>
-<p>為了把物件職則分開需要有額外一個物件 <code>History</code> 專門處理儲存跟回復的功能，為了讓 <code>History</code> 能儲存與回復 <code>PhotoEditor</code> 內部狀態， <code>PhotoEditor</code> 需要把內部狀態改成 <code>public</code> 才能讓 <code>History</code> 存取。這又違背了 encaspulation 的設計原則，像是下面的例子：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PhotoEditor</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">struct</span> <span class="nc">State</span> <span class="p">{</span>                  <span class="c1">// PhotoEditor 內部的參數被曝露給 History
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">image</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int32_t</span> <span class="n">width_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int32_t</span> <span class="n">height_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">Backup</span><span class="p">()</span> <span class="p">{</span> <span class="n">history_</span><span class="p">.</span><span class="n">Push</span><span class="p">(</span><span class="n">state_</span><span class="p">);</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">Undo</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">state_</span> <span class="o">=</span> <span class="n">history_</span><span class="p">.</span><span class="n">Pop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">History</span> <span class="n">history_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">History</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Store</span><span class="p">(</span><span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">states_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">PhotoStat</span> <span class="nf">Restore</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span> <span class="n">state</span> <span class="o">=</span> <span class="n">states_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">states_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">states_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><p>曝露過多參數給外部物件也會造成物件間的耦合(coupling)，有沒有一種更好的方式可以處理儲存狀態與回復狀態同時又不會曝露過多實作細節呢？</p>
-<h2 id="mememto">Mememto<a href="#mememto" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
-<p>上面的問題來自於錯誤的抽象而讓物件間的耦合嚴重，比較好的方式是只提供恰當 API 接口。 Mememto 這個介面(interface)只負責狀態的回復，具體要存什麼東西是由 derived 物件處理，像是下面的例子：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Mememto</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Restore</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                           <span class="c1">// 提供回復介面
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PhotoEditor</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="k">struct</span> <span class="nc">State</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">image</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int32_t</span> <span class="n">width</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="kt">int32_t</span> <span class="n">height</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">Mememto</span><span class="o">*</span> <span class="nf">Backup</span><span class="p">()</span> <span class="p">{</span>                                   <span class="c1">// PhotoEditor 負責提供狀態
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">auto</span><span class="o">*</span> <span class="n">mememto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhotoMememto</span><span class="p">(</span><span class="n">state_</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">mememto</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">Restore</span><span class="p">(</span><span class="n">State</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>                           <span class="c1">// PhotoEditor 負責回復狀態
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">state_</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">state</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">image</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="n">state</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">width</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">History</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Store</span><span class="p">(</span><span class="k">const</span> <span class="n">PhotoEditor</span><span class="o">&amp;</span> <span class="n">editor</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mememtos_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">edttor</span><span class="p">.</span><span class="n">Backup</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">Restore</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Mememto</span><span class="o">*</span> <span class="n">mememto</span> <span class="o">=</span> <span class="n">mememtos_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">mememtos_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">mememto</span><span class="o">-&gt;</span><span class="n">Restore</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">Mememto</span><span class="o">*&gt;</span> <span class="n">mememtos_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PhotoMememto</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Mememto</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="n">Store</span><span class="p">(</span><span class="k">const</span> <span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span> <span class="n">PhotoEditor</span><span class="o">&amp;</span> <span class="n">editor</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">editor_</span> <span class="o">=</span> <span class="n">editor</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">state_</span> <span class="o">=</span> <span class="n">state</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="kt">void</span> <span class="nf">Restore</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">editor_</span><span class="o">-&gt;</span><span class="n">Restore</span><span class="p">(</span><span class="n">state_</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PhotoEditor</span><span class="o">&amp;</span> <span class="n">editor_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></div><p>在上面的例子裡， <code>History</code> 只跟 <code>Mememto::Restore</code> 與 <code>PhotoEditor::Backup</code> 有關，具體 <code>Backup</code> 提供了什麼資料 <code>History</code> 不需要知道，而 <code>PhotoMememto</code> 只跟 <code>PhotoEitor</code> 有關。</p>
-<p>如果 <code>History</code> 需要把狀態從記憶體存到硬碟，這時候只需要修改 <code>History</code> 就可以，而 <code>PhotoEditor</code> 與 <code>PhotoMememto</code> 完全不知道資料來源是那裡，從而讓改動只在相關物件上。</p>
-
-			</div>
-			<hr class="post-end">
-			<footer class="post-info">
+			<div class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>[Aaron]</p>
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/design-pattern">Design pattern</a></span><span class="tag"><a href="/tags/programming">Programming</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>288 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-12-10 22:30</p>
-			</footer>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-12-10 22:30
+					
+						
+					
+				</p>
+			</div>
+			<hr class="post-end">
+			<div class="content">
+				<h2 id="situation">Situation<a href="#situation" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>常用的軟體包括文字編輯器、網頁瀏覽器、影像編輯器通常會提供回復上一步 (Undo) 的功能，雖然不同軟體 Undo 的作用不同，但大體來說都是回到這一個動作前的狀態。</p>
+<p>要實現 Undo 不難，最直觀作法是把目前物件狀態存下來，需要 Undo 的時候就把存下來的變數回復，以影像編輯器為例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">PhotoEditor</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">Backup</span><span class="p">()</span> <span class="p">{</span> <span class="n">histories_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">state_</span><span class="p">);</span> <span class="p">}</span>
+        <span class="n">Undo</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">state_</span> <span class="o">=</span> <span class="n">image_histories_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+            <span class="n">histories_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="k">struct</span> <span class="nc">State</span> <span class="p">{</span>
+            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">image</span><span class="p">;</span>
+            <span class="kt">int32_t</span> <span class="n">width_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">int32_t</span> <span class="n">height_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">};</span>
+
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">histories_</span><span class="p">;</span>
+        <span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><h2 id="difficulty">Difficulty<a href="#difficulty" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>這是一個簡單的方法，但影像編輯器為什麼會跟儲存狀態跟回復狀態有關？影像編輯器不是應該只跟影像編輯相關嗎？這個違背了 singla responsibility 的設計原則，因為 <code>PhotoEditor</code> 被修改的原因除了提供影影編輯相關的功能外，還可能因為儲存狀態跟回復狀態功能而修改。舉例來說，如果狀態存在記憶體裡，但因為種種原因而發覺記憶體空間不足以至於要把狀態儲存到硬碟上，這時候就會需要更改 <code>PhotoEditor</code> ，而把狀態存在記憶體或是硬碟跟 <code>PhotoEditor</code> 似乎是不相關的。</p>
+<p>為了把物件職則分開需要有額外一個物件 <code>History</code> 專門處理儲存跟回復的功能，為了讓 <code>History</code> 能儲存與回復 <code>PhotoEditor</code> 內部狀態， <code>PhotoEditor</code> 需要把內部狀態改成 <code>public</code> 才能讓 <code>History</code> 存取。這又違背了 encaspulation 的設計原則，像是下面的例子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">PhotoEditor</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="k">struct</span> <span class="nc">State</span> <span class="p">{</span>                  <span class="c1">// PhotoEditor 內部的參數被曝露給 History
+</span><span class="c1"></span>            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">image</span><span class="p">;</span>
+            <span class="kt">int32_t</span> <span class="n">width_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="kt">int32_t</span> <span class="n">height_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">};</span>
+
+        <span class="n">Backup</span><span class="p">()</span> <span class="p">{</span> <span class="n">history_</span><span class="p">.</span><span class="n">Push</span><span class="p">(</span><span class="n">state_</span><span class="p">);</span> <span class="p">}</span>
+
+        <span class="n">Undo</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">state_</span> <span class="o">=</span> <span class="n">history_</span><span class="p">.</span><span class="n">Pop</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
+        <span class="n">History</span> <span class="n">history_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">History</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="kt">void</span> <span class="n">Store</span><span class="p">(</span><span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">states_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">PhotoStat</span> <span class="nf">Restore</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span> <span class="n">state</span> <span class="o">=</span> <span class="n">states_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+            <span class="n">states_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span><span class="o">&gt;</span> <span class="n">states_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><p>曝露過多參數給外部物件也會造成物件間的耦合(coupling)，有沒有一種更好的方式可以處理儲存狀態與回復狀態同時又不會曝露過多實作細節呢？</p>
+<h2 id="mememto">Mememto<a href="#mememto" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>上面的問題來自於錯誤的抽象而讓物件間的耦合嚴重，比較好的方式是只提供恰當 API 接口。 Mememto 這個介面(interface)只負責狀態的回復，具體要存什麼東西是由 derived 物件處理，像是下面的例子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Mememto</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Restore</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                           <span class="c1">// 提供回復介面
+</span><span class="c1"></span><span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">PhotoEditor</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="k">struct</span> <span class="nc">State</span> <span class="p">{</span>
+            <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">image</span><span class="p">;</span>
+            <span class="kt">int32_t</span> <span class="n">width</span><span class="p">;</span>
+            <span class="kt">int32_t</span> <span class="n">height</span><span class="p">;</span>
+        <span class="p">};</span>
+
+        <span class="n">Mememto</span><span class="o">*</span> <span class="nf">Backup</span><span class="p">()</span> <span class="p">{</span>                                   <span class="c1">// PhotoEditor 負責提供狀態
+</span><span class="c1"></span>            <span class="k">auto</span><span class="o">*</span> <span class="n">mememto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhotoMememto</span><span class="p">(</span><span class="n">state_</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">mememto</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">void</span> <span class="nf">Restore</span><span class="p">(</span><span class="n">State</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>                           <span class="c1">// PhotoEditor 負責回復狀態
+</span><span class="c1"></span>            <span class="n">state_</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+            <span class="n">state</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">image</span><span class="p">);</span>
+            <span class="n">state</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">width</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">History</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="kt">void</span> <span class="n">Store</span><span class="p">(</span><span class="k">const</span> <span class="n">PhotoEditor</span><span class="o">&amp;</span> <span class="n">editor</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">mememtos_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">edttor</span><span class="p">.</span><span class="n">Backup</span><span class="p">());</span>
+        <span class="p">}</span>
+
+        <span class="kt">void</span> <span class="nf">Restore</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">Mememto</span><span class="o">*</span> <span class="n">mememto</span> <span class="o">=</span> <span class="n">mememtos_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+            <span class="n">mememtos_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+
+            <span class="n">mememto</span><span class="o">-&gt;</span><span class="n">Restore</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">Mememto</span><span class="o">*&gt;</span> <span class="n">mememtos_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">PhotoMememto</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Mememto</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="kt">void</span> <span class="n">Store</span><span class="p">(</span><span class="k">const</span> <span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">,</span> <span class="n">PhotoEditor</span><span class="o">&amp;</span> <span class="n">editor</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">editor_</span> <span class="o">=</span> <span class="n">editor</span><span class="p">;</span>
+            <span class="n">state_</span> <span class="o">=</span> <span class="n">state</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">void</span> <span class="nf">Restore</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
+            <span class="n">editor_</span><span class="o">-&gt;</span><span class="n">Restore</span><span class="p">(</span><span class="n">state_</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="k">private</span><span class="o">:</span>
+        <span class="n">PhotoEditor</span><span class="o">&amp;</span> <span class="n">editor_</span><span class="p">;</span>
+        <span class="n">PhotoEditor</span><span class="o">::</span><span class="n">State</span> <span class="n">state_</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><p>在上面的例子裡， <code>History</code> 只跟 <code>Mememto::Restore</code> 與 <code>PhotoEditor::Backup</code> 有關，具體 <code>Backup</code> 提供了什麼資料 <code>History</code> 不需要知道，而 <code>PhotoMememto</code> 只跟 <code>PhotoEitor</code> 有關。</p>
+<p>如果 <code>History</code> 需要把狀態從記憶體存到硬碟，這時候只需要修改 <code>History</code> 就可以，而 <code>PhotoEditor</code> 與 <code>PhotoMememto</code> 完全不知道資料來源是那裡，從而讓改動只在相關物件上。</p>
+
+			</div>
+			<hr class="art-end">
 		</article>
 		<div class="post-nav thin">
+			<a class="next-post" href="/posts/%E5%88%9D%E5%BF%83/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>初心</span>
+			</a>
 			<a class="prev-post" href="/posts/there-are-no-zero-cost-abstractios/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>There are no zero-cost abstractions</span>
 			</a>
@@ -219,16 +228,22 @@ class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { 
 </div>
 	</main>
 
-	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
-		<p>&copy; 2022 <a href="/">Aaron Chang</a></p>
-		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
-		</p>
-	</footer>
+<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+	<p>
+		&copy; 2023 <a href="/">Aaron Chang</a>
+		&#183; 
+		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
+		
+		&#183; <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		
+	</p>
 
+</footer>
 
-
-	<script src="/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+	<script async src="/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
 	
 
 </body>
