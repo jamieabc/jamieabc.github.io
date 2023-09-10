@@ -29,7 +29,7 @@
       <description>This article tries to write down some notes while trying to solve problem 1552.
 After some days of thinking, I finally understand why this is a binary search problem.
 Thinking Didn&amp;rsquo;t think of binary search because I miss some details about this problem:
- To get maximum of minimum distance among selected numbers, smallest &amp;amp; largest numbers will definited being selected, because choosing them provides maximum range to distribute distance.    Once smallest &amp;amp; largest numbers are selected, theoretically maximum distance could be upper bounded to (largest - smallest) / (selected - 1)</description>
+To get maximum of minimum distance among selected numbers, smallest &amp;amp; largest numbers will definited being selected, because choosing them provides maximum range to distribute distance. Once smallest &amp;amp; largest numbers are selected, theoretically maximum distance could be upper bounded to (largest - smallest) / (selected - 1)</description>
     </item>
     
     <item>
@@ -63,10 +63,12 @@ According to find closest middle cut, it will choose 15 as first cut since it&am
       <guid>/posts/leetcode-1547-1/</guid>
       <description>This article is to write down some notes while solving this problem.
 Greedy I started with this example:
- n = 7, cuts = [1,3,4,5]
-   initial status:
- _ _ _ _ _ _ _ 0 7    first cut at 3:
- _ _ _ _ | _ _ _ _ _ 0 3 3 7  cost: 7 (because total length before cut is 7)</description>
+n = 7, cuts = [1,3,4,5]
+initial status:
+_ _ _ _ _ _ _ 0 7 first cut at 3:
+_ _ _ _ | _ _ _ _ _ 0 3 3 7 cost: 7 (because total length before cut is 7)
+second cut at 1:
+_ _ | _ _ _ | _ _ _ _ _ 0 1 1 3 3 7 cost: 7 + 3 (because total length at 1 is 3)</description>
     </item>
     
     <item>
@@ -76,7 +78,7 @@ Greedy I started with this example:
       
       <guid>/posts/raise-coverate-rate-to-80/</guid>
       <description>Recently I have done raising unit tests coverage rate of 2 packages to at least 80%. Of course, high coverage rate isn&amp;rsquo;t always a gold standard to achieve, and some corner conditions are not necessray to test, so 80% seems a number that tries to demonstrate most code paths are testable.
-These 2 packges with 0% and 20% unit test coverate rate at the time I started to modify. After some refactoring, both packages&#39; coverage rate reaches 80%.</description>
+These 2 packges with 0% and 20% unit test coverate rate at the time I started to modify. After some refactoring, both packages&amp;rsquo; coverage rate reaches 80%.</description>
     </item>
     
   </channel>
