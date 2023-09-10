@@ -6,13 +6,13 @@
     <description>Recent content in Tags on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Aug 2023 18:32:50 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Sep 2023 13:31:08 +0800</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Life</title>
-      <link>/tags/life/</link>
-      <pubDate>Sun, 20 Aug 2023 18:32:50 +0800</pubDate>
+      <title>Podcat</title>
+      <link>/tags/podcat/</link>
+      <pubDate>Sun, 10 Sep 2023 13:31:08 +0800</pubDate>
       
-      <guid>/tags/life/</guid>
+      <guid>/tags/podcat/</guid>
       <description></description>
     </item>
     
@@ -40,6 +40,15 @@
       <pubDate>Sun, 06 Nov 2022 21:58:37 +0800</pubDate>
       
       <guid>/tags/design__pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Life</title>
+      <link>/tags/life/</link>
+      <pubDate>Tue, 27 Jul 2021 22:15:28 +0800</pubDate>
+      
+      <guid>/tags/life/</guid>
       <description></description>
     </item>
     
@@ -85,15 +94,6 @@
       <pubDate>Sun, 27 Jun 2021 18:40:21 +0800</pubDate>
       
       <guid>/tags/software-engineering-at-google/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Algorithm</title>
-      <link>/tags/algorithm/</link>
-      <pubDate>Sun, 20 Jun 2021 14:12:16 +0800</pubDate>
-      
-      <guid>/tags/algorithm/</guid>
       <description></description>
     </item>
     
