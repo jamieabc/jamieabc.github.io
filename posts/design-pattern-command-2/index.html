@@ -12,10 +12,10 @@
 隨著商業變動而讓程式碼需要提供更多不同、更複雜的功能 ，低耦合（couple）的設計可以減少維護成本、減少 bug 出現的機率、提高可讀性。
 接續前面小吃攤例子，每當攤販新增一種商品也同時需要服務員、顧客的溝通做修改，那這樣的設設違反 single responsibility 原則，因為修改物件（攤販、服務員、顧客）原因來自於跟物件本身功能無關。
 接下來再一一拆解顧客與服務員的關係，為什麼顧客需要知道小吃攤點飯時需要加蛋的選項？吃飯加蛋這更像是服務員跟攤販之前的關係。也就是說，顧客與服務員只要能溝通（講國語、講英語），那麼服務員就有辦法知道顧客需要什麼。
-接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
-當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
-當服務員新增一種語言時，只要修改 Language 介面極可：
-如果以 c&#43;&#43; 實作的話會像是這樣：
+ 接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
+ 當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
+ 當服務員新增一種語言時，只要修改 Language 介面極可：
+ 如果以 c&#43;&#43; 實作的話會像是這樣：
 class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot speak english&#34; &lt;&lt; std::endl } virtual void Chiniese() { std::cout &lt;&lt; &#34;不會講中文&#34; &lt;&lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &lt;&lt; &#34;來份飯&#34; &lt;&lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &lt;&lt; &#34;A Noodle&#34; &lt;&lt; std::endl; } }; class Order { public: virtual void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() override { std::cout &lt;&lt; &#34;一碗白飯、蛋 &#34; &lt;&lt; egg_ &lt;&lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() override { std::cout &lt;&lt; &#34;一份麵，湯 &#34; &lt;&lt; soup_ &lt;&lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &lt;&lt; &#34;歡迎光臨&#34; &lt;&lt; std::end; } void English() { std::cout &lt;&lt; &#34;Welcome&#34; &lt;&lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp; order) { std::cout &lt;&lt; order.">
 <meta itemprop="dateModified" content="2022-11-13T13:38:29+08:00" />
 <meta itemprop="wordCount" content="246">
@@ -26,15 +26,16 @@ class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot
 隨著商業變動而讓程式碼需要提供更多不同、更複雜的功能 ，低耦合（couple）的設計可以減少維護成本、減少 bug 出現的機率、提高可讀性。
 接續前面小吃攤例子，每當攤販新增一種商品也同時需要服務員、顧客的溝通做修改，那這樣的設設違反 single responsibility 原則，因為修改物件（攤販、服務員、顧客）原因來自於跟物件本身功能無關。
 接下來再一一拆解顧客與服務員的關係，為什麼顧客需要知道小吃攤點飯時需要加蛋的選項？吃飯加蛋這更像是服務員跟攤販之前的關係。也就是說，顧客與服務員只要能溝通（講國語、講英語），那麼服務員就有辦法知道顧客需要什麼。
-接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
-當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
-當服務員新增一種語言時，只要修改 Language 介面極可：
-如果以 c&#43;&#43; 實作的話會像是這樣：
+ 接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
+ 當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
+ 當服務員新增一種語言時，只要修改 Language 介面極可：
+ 如果以 c&#43;&#43; 實作的話會像是這樣：
 class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot speak english&#34; &lt;&lt; std::endl } virtual void Chiniese() { std::cout &lt;&lt; &#34;不會講中文&#34; &lt;&lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &lt;&lt; &#34;來份飯&#34; &lt;&lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &lt;&lt; &#34;A Noodle&#34; &lt;&lt; std::endl; } }; class Order { public: virtual void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() override { std::cout &lt;&lt; &#34;一碗白飯、蛋 &#34; &lt;&lt; egg_ &lt;&lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() override { std::cout &lt;&lt; &#34;一份麵，湯 &#34; &lt;&lt; soup_ &lt;&lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &lt;&lt; &#34;歡迎光臨&#34; &lt;&lt; std::end; } void English() { std::cout &lt;&lt; &#34;Welcome&#34; &lt;&lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp; order) { std::cout &lt;&lt; order." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/design-pattern-command-2/" /><meta property="article:section" content="posts" />
 
 <meta property="article:modified_time" content="2022-11-13T13:38:29+08:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Design Pattern - Command (2)"/>
 <meta name="twitter:description" content="我目前理解設計模式（design pattern）存在目的是為了讓軟體分層，使得每個物件提供盡可能單一的功能。這樣設計的好處是只要物件提供單一功能，那麼該物件更易於維護，減少變更的機會。
@@ -43,10 +44,10 @@ class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot
 隨著商業變動而讓程式碼需要提供更多不同、更複雜的功能 ，低耦合（couple）的設計可以減少維護成本、減少 bug 出現的機率、提高可讀性。
 接續前面小吃攤例子，每當攤販新增一種商品也同時需要服務員、顧客的溝通做修改，那這樣的設設違反 single responsibility 原則，因為修改物件（攤販、服務員、顧客）原因來自於跟物件本身功能無關。
 接下來再一一拆解顧客與服務員的關係，為什麼顧客需要知道小吃攤點飯時需要加蛋的選項？吃飯加蛋這更像是服務員跟攤販之前的關係。也就是說，顧客與服務員只要能溝通（講國語、講英語），那麼服務員就有辦法知道顧客需要什麼。
-接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
-當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
-當服務員新增一種語言時，只要修改 Language 介面極可：
-如果以 c&#43;&#43; 實作的話會像是這樣：
+ 接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
+ 當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
+ 當服務員新增一種語言時，只要修改 Language 介面極可：
+ 如果以 c&#43;&#43; 實作的話會像是這樣：
 class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot speak english&#34; &lt;&lt; std::endl } virtual void Chiniese() { std::cout &lt;&lt; &#34;不會講中文&#34; &lt;&lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &lt;&lt; &#34;來份飯&#34; &lt;&lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &lt;&lt; &#34;A Noodle&#34; &lt;&lt; std::endl; } }; class Order { public: virtual void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() override { std::cout &lt;&lt; &#34;一碗白飯、蛋 &#34; &lt;&lt; egg_ &lt;&lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() override { std::cout &lt;&lt; &#34;一份麵，湯 &#34; &lt;&lt; soup_ &lt;&lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &lt;&lt; &#34;歡迎光臨&#34; &lt;&lt; std::end; } void English() { std::cout &lt;&lt; &#34;Welcome&#34; &lt;&lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp; order) { std::cout &lt;&lt; order."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -57,7 +58,7 @@ class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>Design Pattern - Command (2)</title>
-	<link rel="stylesheet" href="/css/style.min.dcbe910ae6a58e75dc4f80a35c44aff059020182b3cb843cb0031c1ee437b7a3.css" integrity="sha256-3L6RCualjnXcT4CjXESv8FkCAYKzy4Q8sAMcHuQ3t6M=" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.min.ff166efd50adc08a80c086f15517b03a4a4cf4e24f788f72b74a51296520757a.css" integrity="sha256-/xZu/VCtwIqAwIbxVRewOkpM9OJPeI9yt0pRKWUgdXo=" crossorigin="anonymous">
 	
 </head>
 
@@ -135,76 +136,76 @@ class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot
 </figure>
 
 <p>如果以 c++ 實作的話會像是這樣：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Language</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">English</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Cannot speak english&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Chiniese</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;不會講中文&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ChineseCustomer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Language</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">Chinese</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;來份飯&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">EnglishCustomer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Language</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">English</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A Noodle&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Order</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Details</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FoodOrder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Order</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">FoodOrder</span><span class="p">(</span><span class="kt">bool</span> <span class="n">egg</span><span class="p">)</span> <span class="o">:</span> <span class="n">egg_</span><span class="p">(</span><span class="n">egg</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一碗白飯、蛋 &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">egg_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">egg_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NoodleOrder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Order</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">NoodleOrder</span><span class="p">(</span><span class="kt">bool</span> <span class="n">soup</span><span class="p">)</span> <span class="o">:</span> <span class="n">soup_</span><span class="p">(</span><span class="n">soup</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一份麵，湯 &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">soup_</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"> <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">boo</span> <span class="n">soup_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Waiter</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Language</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">Chinese</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;歡迎光臨&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">English</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Welcome&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Order</span> <span class="nf">GenerateOrder</span><span class="p">()</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FoodStaller</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">  <span class="n">FoodStaller</span><span class="p">()</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">TakeOrder</span><span class="p">(</span><span class="k">const</span> <span class="n">Order</span><span class="o">&amp;</span> <span class="n">order</span><span class="p">)</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">order</span><span class="p">.</span><span class="n">Details</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">FoodStaller</span> <span class="n">food_staller</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Waiter</span> <span class="n">waiter</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 中文溝通
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ChineseCustomer</span> <span class="n">chinese_customer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">waiter</span><span class="p">.</span><span class="n">Chinese</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">chinese_customer</span><span class="p">.</span><span class="n">Chinese</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">food_staller</span><span class="p">.</span><span class="n">TakeOrder</span><span class="p">(</span><span class="n">waiter</span><span class="p">.</span><span class="n">GenerateOrder</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 英文溝通
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">EnglishCustomer</span> <span class="n">english_customer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">waiter</span><span class="p">.</span><span class="n">English</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">english_customer</span><span class="p">.</span><span class="n">English</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">food_staller</span><span class="p">.</span><span class="n">TakeOrder</span><span class="p">(</span><span class="n">waiter</span><span class="p">.</span><span class="n">GenerateOrder</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>這種把實際的指令轉化為參數的方式就是 Command 設計模式。因為參數化後易於儲存與使用，也可以應用在需要提供 undo / redo 的物件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="k">class</span> <span class="nc">Language</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">English</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Cannot speak english&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Chiniese</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;不會講中文&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">ChineseCustomer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Language</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">Chinese</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;來份飯&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">EnglishCustomer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Language</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">English</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A Noodle&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Order</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">Details</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">FoodOrder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Order</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">FoodOrder</span><span class="p">(</span><span class="kt">bool</span> <span class="n">egg</span><span class="p">)</span> <span class="o">:</span> <span class="n">egg_</span><span class="p">(</span><span class="n">egg</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一碗白飯、蛋 &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">egg_</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+
+ <span class="k">private</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">egg_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">NoodleOrder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Order</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">NoodleOrder</span><span class="p">(</span><span class="kt">bool</span> <span class="n">soup</span><span class="p">)</span> <span class="o">:</span> <span class="n">soup_</span><span class="p">(</span><span class="n">soup</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="kt">void</span> <span class="nf">Details</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;一份麵，湯 &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">soup_</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+ <span class="k">private</span><span class="o">:</span>
+  <span class="n">boo</span> <span class="n">soup_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Waiter</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Language</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">Chinese</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;歡迎光臨&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="nf">English</span><span class="p">()</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Welcome&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">Order</span> <span class="nf">GenerateOrder</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">FoodStaller</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">FoodStaller</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="kt">void</span> <span class="nf">TakeOrder</span><span class="p">(</span><span class="k">const</span> <span class="n">Order</span><span class="o">&amp;</span> <span class="n">order</span><span class="p">)</span> <span class="p">{</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">order</span><span class="p">.</span><span class="n">Details</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">FoodStaller</span> <span class="n">food_staller</span><span class="p">;</span>
+    <span class="n">Waiter</span> <span class="n">waiter</span><span class="p">;</span>
+
+    <span class="c1">// 中文溝通
+</span><span class="c1"></span>    <span class="n">ChineseCustomer</span> <span class="n">chinese_customer</span><span class="p">;</span>
+    <span class="n">waiter</span><span class="p">.</span><span class="n">Chinese</span><span class="p">();</span>
+    <span class="n">chinese_customer</span><span class="p">.</span><span class="n">Chinese</span><span class="p">();</span>
+    <span class="n">food_staller</span><span class="p">.</span><span class="n">TakeOrder</span><span class="p">(</span><span class="n">waiter</span><span class="p">.</span><span class="n">GenerateOrder</span><span class="p">());</span>
+
+    <span class="c1">// 英文溝通
+</span><span class="c1"></span>    <span class="n">EnglishCustomer</span> <span class="n">english_customer</span><span class="p">;</span>
+    <span class="n">waiter</span><span class="p">.</span><span class="n">English</span><span class="p">();</span>
+    <span class="n">english_customer</span><span class="p">.</span><span class="n">English</span><span class="p">();</span>
+    <span class="n">food_staller</span><span class="p">.</span><span class="n">TakeOrder</span><span class="p">(</span><span class="n">waiter</span><span class="p">.</span><span class="n">GenerateOrder</span><span class="p">());</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>這種把實際的指令轉化為參數的方式就是 Command 設計模式。因為參數化後易於儲存與使用，也可以應用在需要提供 undo / redo 的物件。</p>
 
 			</div>
 			<hr class="art-end">
@@ -224,7 +225,7 @@ class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot
 <footer id="site-footer" class="section-inner thin animated fadeIn faster">
 	<p>
 		&copy; 2023 <a href="/">Aaron Chang</a>
-		&#183;  &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+		&#183; 
 		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
 		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
 		
@@ -235,7 +236,7 @@ class Language { public: virtual void English() { std::cout &lt;&lt; &#34;Cannot
 </footer>
 
 	
-	<script async src="/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	<script async src="/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
 	
 	
 

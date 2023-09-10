@@ -7,32 +7,30 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta itemprop="name" content="Hyrum&#39;s Law">
 <meta itemprop="description" content="這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c&#43;&#43; 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在"><meta itemprop="datePublished" content="2021-06-16T21:58:12+08:00" />
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。"><meta itemprop="datePublished" content="2021-06-16T21:58:12+08:00" />
 <meta itemprop="dateModified" content="2021-06-16T21:58:12+08:00" />
 <meta itemprop="wordCount" content="69">
 <meta itemprop="keywords" content="Programming,Software Engineering at Google,Reading," /><meta property="og:title" content="Hyrum&#39;s Law" />
 <meta property="og:description" content="這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c&#43;&#43; 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在" />
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/hyrum-law/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-06-16T21:58:12+08:00" />
 <meta property="article:modified_time" content="2021-06-16T21:58:12+08:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Hyrum&#39;s Law"/>
 <meta name="twitter:description" content="這章在講 scalability，裡面提到一個概念 Hyrum&rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c&#43;&#43; 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在"/>
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。"/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -42,7 +40,7 @@ With a sufficient number of users of an API, it does not matter what you promise
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>Hyrum&#39;s Law</title>
-	<link rel="stylesheet" href="/css/style.min.dcbe910ae6a58e75dc4f80a35c44aff059020182b3cb843cb0031c1ee437b7a3.css" integrity="sha256-3L6RCualjnXcT4CjXESv8FkCAYKzy4Q8sAMcHuQ3t6M=" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.min.ff166efd50adc08a80c086f15517b03a4a4cf4e24f788f72b74a51296520757a.css" integrity="sha256-/xZu/VCtwIqAwIbxVRewOkpM9OJPeI9yt0pRKWUgdXo=" crossorigin="anonymous">
 	
 </head>
 
@@ -123,7 +121,7 @@ will be depended on by somebody.</p>
 <footer id="site-footer" class="section-inner thin animated fadeIn faster">
 	<p>
 		&copy; 2023 <a href="/">Aaron Chang</a>
-		&#183;  &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+		&#183; 
 		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
 		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
 		
@@ -134,7 +132,7 @@ will be depended on by somebody.</p>
 </footer>
 
 	
-	<script async src="/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	<script async src="/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
 	
 	
 
