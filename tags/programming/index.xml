@@ -27,7 +27,7 @@ class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { 
       <guid>/posts/there-are-no-zero-cost-abstractios/</guid>
       <description>CppCon 2019: Chandler Carruth “There Are No Zero-cost Abstractions”
 Key takeaways:
-Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞處時才值得 Run time v.s. build time （protocol buffer） Trivia class (unique pointer v.s. raw pointer) Human costs (a huge function v.s. multiple separated smaller functions, parameters) </description>
+ Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞處時才值得 Run time v.s. build time （protocol buffer） Trivia class (unique pointer v.s. raw pointer) Human costs (a huge function v.s. multiple separated smaller functions, parameters)  </description>
     </item>
     
     <item>
@@ -37,7 +37,7 @@ Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞�
       
       <guid>/posts/design-pattern-state-1/</guid>
       <description>假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：
-早上9~12點播放&amp;quot;早安&amp;quot; 中午12~1點播放&amp;quot;午餐時間&amp;quot; 下午1~6點播放&amp;quot;下午安&amp;quot; 晚上6~隔天早上9點播放&amp;quot;下班&amp;quot; 最簡單的實現方式會是怎麼樣呢？
+ 早上9~12點播放&amp;quot;早安&amp;quot; 中午12~1點播放&amp;quot;午餐時間&amp;quot; 下午1~6點播放&amp;quot;下午安&amp;quot; 晚上6~隔天早上9點播放&amp;quot;下班&amp;quot;  最簡單的實現方式會是怎麼樣呢？
 class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &amp;gt;= 9 &amp;amp;&amp;amp; hour_ &amp;lt; 12) { cout &amp;lt;&amp;lt; &amp;#34;Good morning&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 12 &amp;amp;&amp;amp; hour_ &amp;lt; 13) { cout &amp;lt;&amp;lt; &amp;#34;Lunch time&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 13 &amp;amp;&amp;amp; hour_ &amp;lt; 18) { cout &amp;lt;&amp;lt; &amp;#34;Good afternoon&amp;#34; &amp;lt;&amp;lt; endl; } else { cout &amp;lt;&amp;lt; &amp;#34;Outside of working hour&amp;#34; &amp;lt;&amp;lt; endl; } } void TerminateCall() {} void SetHour(size_t hour) { hour_ = hour; } private: size_t hour_ = 0; }; 一切看起來都很正常，程式碼不長、每個函式執行目標明確。</description>
     </item>
     
@@ -53,10 +53,10 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &a
 隨著商業變動而讓程式碼需要提供更多不同、更複雜的功能 ，低耦合（couple）的設計可以減少維護成本、減少 bug 出現的機率、提高可讀性。
 接續前面小吃攤例子，每當攤販新增一種商品也同時需要服務員、顧客的溝通做修改，那這樣的設設違反 single responsibility 原則，因為修改物件（攤販、服務員、顧客）原因來自於跟物件本身功能無關。
 接下來再一一拆解顧客與服務員的關係，為什麼顧客需要知道小吃攤點飯時需要加蛋的選項？吃飯加蛋這更像是服務員跟攤販之前的關係。也就是說，顧客與服務員只要能溝通（講國語、講英語），那麼服務員就有辦法知道顧客需要什麼。
-接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
-當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
-當服務員新增一種語言時，只要修改 Language 介面極可：
-如果以 c++ 實作的話會像是這樣：
+ 接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
+ 當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
+ 當服務員新增一種語言時，只要修改 Language 介面極可：
+ 如果以 c++ 實作的話會像是這樣：
 class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Cannot speak english&amp;#34; &amp;lt;&amp;lt; std::endl } virtual void Chiniese() { std::cout &amp;lt;&amp;lt; &amp;#34;不會講中文&amp;#34; &amp;lt;&amp;lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &amp;lt;&amp;lt; &amp;#34;來份飯&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &amp;lt;&amp;lt; &amp;#34;A Noodle&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class Order { public: virtual void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一碗白飯、蛋 &amp;#34; &amp;lt;&amp;lt; egg_ &amp;lt;&amp;lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一份麵，湯 &amp;#34; &amp;lt;&amp;lt; soup_ &amp;lt;&amp;lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &amp;lt;&amp;lt; &amp;#34;歡迎光臨&amp;#34; &amp;lt;&amp;lt; std::end; } void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Welcome&amp;#34; &amp;lt;&amp;lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp;amp; order) { std::cout &amp;lt;&amp;lt; order.</description>
     </item>
     
@@ -67,10 +67,10 @@ class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &am
       
       <guid>/posts/design-pattern-command-1/</guid>
       <description>想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
-簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
-顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
-如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
-雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+ 簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+ 顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+ 如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用  上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+ 雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
 有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
 攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
 另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。</description>
@@ -83,7 +83,8 @@ class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &am
       
       <guid>/images-in-content/design-pattern-command/</guid>
       <description>Design Pattern - Command 想像一個常見的場景：一位顧客走到小吃攤販前點了一份小吃。以 class diagram 表示會像是下面這個樣子：
-Imageine a common scenario:</description>
+Imageine a common scenario:
+ </description>
     </item>
     
     <item>
@@ -118,7 +119,7 @@ Imageine a common scenario:</description>
       
       <guid>/posts/bus-factor/</guid>
       <description>The number of people that need to get hit by a bus before your project is completely doomed.
-這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
+ 這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
 大部份人的天性是希望等到程式碼寫到完美後再發佈，但只有一個人知道的專案除了容易後繼無人外，缺乏討論、溝通的專案很可能在設計初期就埋藏了不可彌補的錯誤。
 常見的 Documentation，Pair pairgramming，Code review 都可以避免知識只存在少數人腦中的情況。</description>
     </item>

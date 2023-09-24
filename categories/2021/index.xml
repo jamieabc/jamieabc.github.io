@@ -37,8 +37,8 @@
       
       <guid>/posts/david-recardo/</guid>
       <description>李嘉圖定律：
-土地租金是土地使用者支付的價格，它是由壟斷性（稀缺性）決定，而不是由地主在上面做的投資和改良成本決定；它的價格受限於租用者（農民）能夠承擔的價格。
-空氣因為供給無限，所以沒有任何價值；土地從某方面來說也是無限的（地球上還有很多地方的土地未經開發、居住），但不同地段租金有極大差異，為什麼同樣是自然資源，前者沒有任何價值，而後者有極大差異？
+ 土地租金是土地使用者支付的價格，它是由壟斷性（稀缺性）決定，而不是由地主在上面做的投資和改良成本決定；它的價格受限於租用者（農民）能夠承擔的價格。
+ 空氣因為供給無限，所以沒有任何價值；土地從某方面來說也是無限的（地球上還有很多地方的土地未經開發、居住），但不同地段租金有極大差異，為什麼同樣是自然資源，前者沒有任何價值，而後者有極大差異？
 李嘉圖給出了一個解釋，土地租金由兩個因素決定：收入差、和其他投資回報對比。
 第一個因素來自於自身產出，一片土地有充足水量，能產出的農作物會比貧瘠土地上所產出的農作物多，於是收入差別造成了租金差別。這個原因也同樣適用於人流多的地段、交通發達地段。
 第二個因素來自於跟其它投資相比，如果買股票的回報率大於炒房，那麼錢會往股票湧入，於是投入到房地產的資金減少，土地價格下降，造成土地的投資回報率上升。
@@ -67,7 +67,7 @@
       
       <guid>/posts/bus-factor/</guid>
       <description>The number of people that need to get hit by a bus before your project is completely doomed.
-這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
+ 這個指標橫量多少人熟悉專案，直觀上來說如果只有原作者了解專案，那麼專案就愈容易受到個人影嚮；了解的人愈多代表專案相關的知識愈被廣泛熟知。有趣的是，書中提到這個概念並不是在 knowledge sharing 相關章節，而是在鼓勵多與人互動的章節。
 大部份人的天性是希望等到程式碼寫到完美後再發佈，但只有一個人知道的專案除了容易後繼無人外，缺乏討論、溝通的專案很可能在設計初期就埋藏了不可彌補的錯誤。
 常見的 Documentation，Pair pairgramming，Code review 都可以避免知識只存在少數人腦中的情況。</description>
     </item>
@@ -91,11 +91,10 @@ Taking an example of array [1, 2, 1, 3, 1, 4], maximum range from 2 ~ 3.
       
       <guid>/posts/hyrum-law/</guid>
       <description>這章在講 scalability，裡面提到一個概念 Hyrum&amp;rsquo;s Law (Hyrum 是 Google 工程師):
-With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
-這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
+ With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviors of your system will be depended on by somebody.
+ 這段話大意是任何提供給外部系統的 API，不論文件上如何寫，任何可被觀測的行為最終都會被某種方式所依賴。有點繞口，書上舉的例子是 hash table，幾乎所有工程師都知道 hash table 內儲存物件的順序是不固定的，所以程式執行不該依賴於 hash table 所提供的順序。
 我在這部影片中聽到原作者的另一個例子：在某個 c++ 的 header file 裡面加了一行註解，導致測試壞掉……how could that happen? 原來是有人把測試寫死在程式執行到第幾行的時候，所以新增註解導致錯誤。
-愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。
-依賴無處不在</description>
+愈多人使用 API 代表提供愈高的價值，但因為愈多人使用也促使這隻 API 的 dependency 愈高，反而阻止了 API 更新。</description>
     </item>
     
   </channel>

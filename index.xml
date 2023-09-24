@@ -6,7 +6,20 @@
     <description>Recent content on Cognition Limits Imagination</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Sep 2023 13:31:08 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Sep 2023 19:58:08 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WBC 2009 日本對韓國</title>
+      <link>/posts/wbc-2009-japan-korea/</link>
+      <pubDate>Sun, 24 Sep 2023 19:58:08 +0800</pubDate>
+      
+      <guid>/posts/wbc-2009-japan-korea/</guid>
+      <description>很喜歡 2009 年 WBC 日本對韓國的這場比賽，雙方纏鬥到第十局才比出勝負。
+最後讓日本得勝的是鈴木一朗揮出2分安打。
+十局上鈴木一朗上場時，日本隊2人出局，同時場上二、三壘有人，投手是林昌勇。鈴木一朗在2好2壞時，第8球擊出中外野平飛安打。
+這場堪稱經典，因為鈴木一朗展現了他所謂「無論怎麼樣球都能打出」的能力，其中有一球的球棒甚至碰觸地面，只為擊出界外增加投手壓力。
+投手與打者對決，兩方皆為菁英且都有必勝決心與實力，每當重新回看，都覺得熱血沸騰。</description>
+    </item>
+    
     <item>
       <title>對於軍隊的第一印象</title>
       <link>/posts/%E5%B0%8D%E6%96%BC%E8%BB%8D%E9%9A%8A%E7%9A%84%E7%AC%AC%E4%B8%80%E5%8D%B0%E8%B1%A1/</link>
@@ -52,7 +65,7 @@ class PhotoEditor { public: Backup() { histories_.push_back(state_); } Undo() { 
       <guid>/posts/there-are-no-zero-cost-abstractios/</guid>
       <description>CppCon 2019: Chandler Carruth “There Are No Zero-cost Abstractions”
 Key takeaways:
-Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞處時才值得 Run time v.s. build time （protocol buffer） Trivia class (unique pointer v.s. raw pointer) Human costs (a huge function v.s. multiple separated smaller functions, parameters) </description>
+ Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞處時才值得 Run time v.s. build time （protocol buffer） Trivia class (unique pointer v.s. raw pointer) Human costs (a huge function v.s. multiple separated smaller functions, parameters)  </description>
     </item>
     
     <item>
@@ -62,7 +75,7 @@ Tradeoff 所有的抽象都有代價，只有當抽象帶來的好處大於壞�
       
       <guid>/posts/design-pattern-state-1/</guid>
       <description>假設某間銀行電話答錄機會根據目前時間播放出不同對話，具體來說有四個時段：
-早上9~12點播放&amp;quot;早安&amp;quot; 中午12~1點播放&amp;quot;午餐時間&amp;quot; 下午1~6點播放&amp;quot;下午安&amp;quot; 晚上6~隔天早上9點播放&amp;quot;下班&amp;quot; 最簡單的實現方式會是怎麼樣呢？
+ 早上9~12點播放&amp;quot;早安&amp;quot; 中午12~1點播放&amp;quot;午餐時間&amp;quot; 下午1~6點播放&amp;quot;下午安&amp;quot; 晚上6~隔天早上9點播放&amp;quot;下班&amp;quot;  最簡單的實現方式會是怎麼樣呢？
 class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &amp;gt;= 9 &amp;amp;&amp;amp; hour_ &amp;lt; 12) { cout &amp;lt;&amp;lt; &amp;#34;Good morning&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 12 &amp;amp;&amp;amp; hour_ &amp;lt; 13) { cout &amp;lt;&amp;lt; &amp;#34;Lunch time&amp;#34; &amp;lt;&amp;lt; endl; } else if (hour_ &amp;gt;= 13 &amp;amp;&amp;amp; hour_ &amp;lt; 18) { cout &amp;lt;&amp;lt; &amp;#34;Good afternoon&amp;#34; &amp;lt;&amp;lt; endl; } else { cout &amp;lt;&amp;lt; &amp;#34;Outside of working hour&amp;#34; &amp;lt;&amp;lt; endl; } } void TerminateCall() {} void SetHour(size_t hour) { hour_ = hour; } private: size_t hour_ = 0; }; 一切看起來都很正常，程式碼不長、每個函式執行目標明確。</description>
     </item>
     
@@ -78,10 +91,10 @@ class AnswerMachine { public: void ReceiveCall() {} void Answer() { if (hour_ &a
 隨著商業變動而讓程式碼需要提供更多不同、更複雜的功能 ，低耦合（couple）的設計可以減少維護成本、減少 bug 出現的機率、提高可讀性。
 接續前面小吃攤例子，每當攤販新增一種商品也同時需要服務員、顧客的溝通做修改，那這樣的設設違反 single responsibility 原則，因為修改物件（攤販、服務員、顧客）原因來自於跟物件本身功能無關。
 接下來再一一拆解顧客與服務員的關係，為什麼顧客需要知道小吃攤點飯時需要加蛋的選項？吃飯加蛋這更像是服務員跟攤販之前的關係。也就是說，顧客與服務員只要能溝通（講國語、講英語），那麼服務員就有辦法知道顧客需要什麼。
-接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
-當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
-當服務員新增一種語言時，只要修改 Language 介面極可：
-如果以 c++ 實作的話會像是這樣：
+ 接下來是服務員與攤販之類的關係，服務員只要把顧客的訂單通知攤販即可，不同的訂單可能會有不同的參數，而不同訂單的參數屬於各自的 private 資料，並不需要洩露。
+ 當攤販新增了咖哩飯的餐點時，只需要新增一個 class 便能達成：
+ 當服務員新增一種語言時，只要修改 Language 介面極可：
+ 如果以 c++ 實作的話會像是這樣：
 class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Cannot speak english&amp;#34; &amp;lt;&amp;lt; std::endl } virtual void Chiniese() { std::cout &amp;lt;&amp;lt; &amp;#34;不會講中文&amp;#34; &amp;lt;&amp;lt; std::endl } }; class ChineseCustomer : public Language { public: void Chinese() override { std::cout &amp;lt;&amp;lt; &amp;#34;來份飯&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class EnglishCustomer : public Language { public: void English() override { std::cout &amp;lt;&amp;lt; &amp;#34;A Noodle&amp;#34; &amp;lt;&amp;lt; std::endl; } }; class Order { public: virtual void Details() = 0; }; class FoodOrder : public Order { public: FoodOrder(bool egg) : egg_(egg) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一碗白飯、蛋 &amp;#34; &amp;lt;&amp;lt; egg_ &amp;lt;&amp;lt; std::endl; } private: bool egg_ = false; }; class NoodleOrder : public Order { public: NoodleOrder(bool soup) : soup_(soup) {} void Details() override { std::cout &amp;lt;&amp;lt; &amp;#34;一份麵，湯 &amp;#34; &amp;lt;&amp;lt; soup_ &amp;lt;&amp;lt; endl; } private: boo soup_ = false; }; class Waiter : public Language { public: void Chinese() { std::cout &amp;lt;&amp;lt; &amp;#34;歡迎光臨&amp;#34; &amp;lt;&amp;lt; std::end; } void English() { std::cout &amp;lt;&amp;lt; &amp;#34;Welcome&amp;#34; &amp;lt;&amp;lt; std::end; } Order GenerateOrder() {} }; class FoodStaller { public: FoodStaller() {} void TakeOrder(const Order&amp;amp; order) { std::cout &amp;lt;&amp;lt; order.</description>
     </item>
     
@@ -92,10 +105,10 @@ class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &am
       
       <guid>/posts/design-pattern-command-1/</guid>
       <description>想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
-簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
-顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
-如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
-雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+ 簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+ 顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+ 如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用  上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+ 雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
 有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
 攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
 另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。</description>
@@ -108,7 +121,8 @@ class Language { public: virtual void English() { std::cout &amp;lt;&amp;lt; &am
       
       <guid>/images-in-content/design-pattern-command/</guid>
       <description>Design Pattern - Command 想像一個常見的場景：一位顧客走到小吃攤販前點了一份小吃。以 class diagram 表示會像是下面這個樣子：
-Imageine a common scenario:</description>
+Imageine a common scenario:
+ </description>
     </item>
     
     <item>
@@ -120,18 +134,6 @@ Imageine a common scenario:</description>
       <description>忘了從那邊下載到的電子書，書名是「低調做人 高調做事」，原本以為會講什麼大道理，想不到現在看了50頁，發覺書的內容就不斷在重複書名…只是透過不同的例子。
 但這些例子，也不曉得是真是假，其中一個講到關羽因為個性太過張揚，以致於最後戰死麥城。書中分析的很有道理，講的頭頭是道，不過我也沒仔細深就。
 也許，有些道理，實際上用看看才知道有沒有用。</description>
-    </item>
-    
-    <item>
-      <title>Dropbox Engineer Ladder</title>
-      <link>/posts/dropbox-engineer-ladder/</link>
-      <pubDate>Fri, 16 Jul 2021 23:14:09 +0800</pubDate>
-      
-      <guid>/posts/dropbox-engineer-ladder/</guid>
-      <description>最近 Dropbox 發布了 engineer ladder
-從 software engineer 到 quality assurance engineer，再到 reliability engineer，不同層級有著不同的標準。
-大公司有著明確制度，想要往上爬就需要滿足特定條件，一方面是學習，另一方面也是挑戰，能不能上去還是看個人。
-公司內部也有相對應文件，我想，先定好目標，比較知道缺失什麼需要補強。</description>
     </item>
     
   </channel>

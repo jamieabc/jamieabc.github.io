@@ -7,10 +7,10 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta itemprop="name" content="Design Pattern - Command (1)">
 <meta itemprop="description" content="想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
-簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
-顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
-如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
-雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+ 簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+ 顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+ 如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用  上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+ 雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
 有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
 攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
 另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。">
@@ -18,10 +18,10 @@
 <meta itemprop="wordCount" content="29">
 <meta itemprop="keywords" content="Design pattern,Programming," /><meta property="og:title" content="Design Pattern - Command (1)" />
 <meta property="og:description" content="想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
-簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
-顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
-如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
-雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+ 簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+ 顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+ 如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用  上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+ 雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
 有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
 攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
 另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。" />
@@ -29,13 +29,14 @@
 <meta property="og:url" content="/posts/design-pattern-command-1/" /><meta property="article:section" content="posts" />
 
 <meta property="article:modified_time" content="2022-11-06T23:11:07+08:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Design Pattern - Command (1)"/>
 <meta name="twitter:description" content="想像一個常見的場景：一位顧客走到小吃攤前點了一份小吃，以 class diagram 表示會像是下面這樣：
-簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
-顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
-如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用 上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
-雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
+ 簡單的情境隱含著一些限制：小吃攤要正好有空、顧客要先排隊、兩者講同樣的語言、先點餐後付錢還是先付錢後取餐、如果修改訂單攤販要記得之前點了什麼…。 這樣模式在人不多時候還行的通，但如果要有效溝通或是人一旦多起來，需要把顧客與攤販的緊密耦合(couple)解耦(decouple)，這時候會需要額外一位服務員做準備餐點之外的工作，像下樣這樣：
+ 顧客與攤販間多了位服務員，把顧客與攤販的關系解耦：
+ 如果顧客講英語，服務員可以聽了英語再把訂單轉換成國語 服務員可以在紙上記下每位顧客的訂單，照著順序發給老闆 服務員可以在點餐/取餐時收取費用  上面的例子，把顧客-服務員-攤販的關系寫的很固定，如果服務員要離職，攤販想要找另一位服務員，提出的要求會是要同時能說英文與中文，只要任何服務員可以說英文與中文便可以應徵。這個時候，會說中文與英文便是一種 interface ：
+ 雖然每個物件依賴於 interface ，但還會有個問題，如果今天攤販在點飯的時候除了可以選擇飯量之外，還可以選要不要加滷汁，這時候會同時需要修改 WaiterIntf ， CustomerIntf ，與 FoodStallerIntf 。物件之間的關係依然是緊緊的耦合，因為顧客、服務員、攤販需要提供一致的溝通。
 有沒有可能顧客是巷口大媽，一開始就講：今天人好多，生意不錯喔！？你們家的麵怎麼樣？會不會辣？啊，不行，今天好像有點餓，還是吃點飯？會不會吃不飽啊，有沒有其它能選…
 攤販肯定是不需要這段話，而是需要服務員溝通過後轉譯的訂單，這樣的情況意味著顧客下單時說的長篇大論攤販不會也不需要知道，攤販只需要顧客需要真正的東西（訂單）是什麼。
 另一個問題是，單純把 API 轉成 interface 是好的作法嗎？怎麼感覺物件間的耦合還是很嚴重？這些問題會在下一篇討論。"/>
@@ -48,7 +49,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>Design Pattern - Command (1)</title>
-	<link rel="stylesheet" href="/css/style.min.dcbe910ae6a58e75dc4f80a35c44aff059020182b3cb843cb0031c1ee437b7a3.css" integrity="sha256-3L6RCualjnXcT4CjXESv8FkCAYKzy4Q8sAMcHuQ3t6M=" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/style.min.ff166efd50adc08a80c086f15517b03a4a4cf4e24f788f72b74a51296520757a.css" integrity="sha256-/xZu/VCtwIqAwIbxVRewOkpM9OJPeI9yt0pRKWUgdXo=" crossorigin="anonymous">
 	
 </head>
 
@@ -145,7 +146,7 @@
 <footer id="site-footer" class="section-inner thin animated fadeIn faster">
 	<p>
 		&copy; 2023 <a href="/">Aaron Chang</a>
-		&#183;  &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+		&#183; 
 		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
 		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
 		
@@ -156,7 +157,7 @@
 </footer>
 
 	
-	<script async src="/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	<script async src="/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
 	
 	
 
